@@ -31,7 +31,7 @@ const cards = [
 
 const HowFireAiWorksSection: Component = () => {
     return (
-        <div class="max-w-[1200px] mx-auto px-4 py-16">
+        <div class="max-w-[1200px] mx-auto px-4 py-16" id="how-it-works">
             {/* Header */}
             <div class="mb-12">
                 <div class="inline-flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full mb-6">

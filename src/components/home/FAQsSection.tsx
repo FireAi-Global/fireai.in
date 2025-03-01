@@ -40,7 +40,7 @@ const FAQItem: Component<{ question: string; answer: string }> = (props) => {
     const [isOpen, setIsOpen] = createSignal(false);
 
     return (
-        <div class="border border-[rgba(130,133,206,0.2)] rounded-[12px] p-6 cursor-pointer" 
+        <div class="border border-[rgba(130,133,206,0.2)] rounded-[12px] p-6 cursor-pointer" id="faq"
              onClick={() => setIsOpen(!isOpen())}>
             <div class="flex justify-between items-center">
                 <h3 class="text-[18px] text-black">{props.question}</h3>

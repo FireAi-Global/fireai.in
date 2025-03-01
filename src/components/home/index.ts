@@ -1,8 +1,8 @@
 import HeroSection from "./HeroSection";
 import ClientSection from "./ClientSection";
-import CarouselSection from "./CarouselSection";
+import CarouselSection from "./OurSolutionsSection";
 import HowFireAiWorks from "./HowFireAiWorksSection"
-import OurSolutionsSections from "./OurSolutionsSection";
+import OurSolutionsSections from "./KeyFeaturesSection";
 import FAQsSection from "./FAQsSection";
 import PreFooterSection from "./PreFooterSection";
 
