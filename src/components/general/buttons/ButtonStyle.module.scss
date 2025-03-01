@@ -1,0 +1,31 @@
+.button {
+    width: 160px;
+    height: 48px;
+    border-radius: 44px;
+    gap: 10px;
+    padding: 10px 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.2s ease-in-out;
+}
+
+.primary {
+    background: linear-gradient(90deg, #0915A0 0%, #0169FD 100%);
+    color: white;
+    border: none;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.secondary {
+    background: white;
+    color: #0169FD;
+    border: 1px solid #E4E3FF;
+    
+    &:hover {
+        background: #F8F9FA;
+    }
+}
