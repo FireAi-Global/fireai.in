@@ -1,5 +1,6 @@
 import { Component } from "solid-js";
 import { Clients } from "../../assets/landing";
+import { Motion } from "solid-motionone";
 
 const clientLogos = [
   { src: Clients.daffoworth, alt: "Daffoworth Pharmaceutical" },
@@ -10,8 +11,6 @@ const clientLogos = [
 ];
 
 const ClientSection: Component = () => {
-  const duplicatedLogos = [...clientLogos, ...clientLogos];
-
   return (
     <div class="max-w-[1200px] mx-auto py-16 px-4 text-center">
       <h2 class="text-[20px] font-medium text-gray-800 mb-12">
@@ -30,17 +29,23 @@ const ClientSection: Component = () => {
       </div>
 
       {/* Mobile Marquee */}
-      <div class="lg:hidden relative w-full overflow-hidden">
-        <div class="overflow-hidden">
-          <div class="flex items-center">
-            {duplicatedLogos.map((logo) => (
-              <img 
-                src={logo.src} 
-                alt={logo.alt} 
-                class="h-5 object-contain mr-12" 
-              />
+      <div class="lg:hidden relative w-full">
+        <div class="flex overflow-hidden">
+          <Motion.div
+            class="flex gap-12 items-center"
+            animate={{
+              x: [0, -1035], // Adjust this value based on your content width
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              easing: "linear"
+            }}
+          >
+            {[...clientLogos, ...clientLogos].map((logo) => (
+              <img src={logo.src} alt={logo.alt} class="h-5 object-contain" />
             ))}
-          </div>
+          </Motion.div>
         </div>
       </div>
     </div>
