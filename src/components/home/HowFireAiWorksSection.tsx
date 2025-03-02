@@ -33,14 +33,14 @@ const HowFireAiWorksSection: Component = () => {
     const [currentSlide, setCurrentSlide] = createSignal(0);
 
     return (
-        <div class="max-w-[1200px] mx-auto px-4 py-16" id="how-it-works">
+        <div class="max-w-[1200px] mx-auto lg:px-4 py-16" id="how-it-works">
             {/* Header */}
             <div class="text-center mb-12">
                 <div class="inline-flex items-center gap-2 bg-[#F1F2FF] px-4 py-2 rounded-full mb-4">
                     <img src={FireSmart} alt="FireSmart" class="w-4 h-4" />
-                    <span class="text-[#2B4EE7]">4 easy step process</span>
+                    <span>4 easy step process</span>
                 </div>
-                <h2 class="text-[32px] font-medium">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-medium">
                     How FireAI Works
                 </h2>
             </div>
@@ -68,7 +68,7 @@ const HowFireAiWorksSection: Component = () => {
 
             {/* Mobile Carousel */}
             <div class="lg:hidden">
-                <div class="bg-[#F8F9FF] rounded-[24px] p-8">
+                <div class="bg-[#F8F9FF] rounded-[24px] p-4 lg:p-8">
                     {/* Current Slide Content */}
                     <div class="mb-8">
                         <img 

@@ -7,8 +7,8 @@ const PreFooterSection: Component = () => {
             <div class="max-w-[1200px] mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 items-center">
                     {/* Left Content */}
-                    <div class="p-12 md:p-16">
-                        <h2 class="text-[48px] font-medium text-white leading-tight mb-6">
+                    <div class="px-12 md:px-16 pt-10 lg:pb-10">
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight mb-6">
                             Power your business
                             <br />
                             with FireAI
@@ -29,7 +29,7 @@ const PreFooterSection: Component = () => {
                         <img 
                             src={PreFooterImage} 
                             alt="FireAI Dashboard" 
-                            class="w-full h-full object-cover object-left-top transform translate-x-12 translate-y-12"
+                            class="w-full h-full object-cover object-left-top transform translate-x-2 translate-y-4"
                         />
                     </div>
                 </div>

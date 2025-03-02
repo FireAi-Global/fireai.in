@@ -43,9 +43,9 @@ const FAQItem: Component<{ question: string; answer: string }> = (props) => {
         <div class="border border-[rgba(130,133,206,0.2)] rounded-[12px] p-6 cursor-pointer" id="faq"
              onClick={() => setIsOpen(!isOpen())}>
             <div class="flex justify-between items-center">
-                <h3 class="text-[18px] text-black">{props.question}</h3>
-                <button class="text-blue-500 w-6 h-6 flex items-center justify-center rounded-full border border-blue-500">
-                    {isOpen() ? '-' : '+'}
+                <h3 class="text-base text-black">{props.question}</h3>
+                <button class="text-blue-500 w-4 h-4 lg:w-8 lg:h-8 min-w-[28px] min-h-[28px] flex items-center justify-center rounded-full border border-blue-500">
+                    <span class="text-xl leading-none mb-[2px]">{isOpen() ? '-' : '+'}</span>
                 </button>
             </div>
             {isOpen() && (
@@ -66,7 +66,7 @@ const FAQsSection: Component = () => {
                     <img src={FireSmart} alt="FireSmart" />
                     <span class="">FAQS</span>
                 </div>
-                <h2 class="text-[40px] font-medium">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-medium">
                     Frequently asked questions
                 </h2>
             </div>

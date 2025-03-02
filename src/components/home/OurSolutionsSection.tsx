@@ -37,7 +37,7 @@ const CarouselSection = () => {
     };
 
     return (
-        <div class="max-w-[1200px] mx-auto px-4 py-16" id="solutions">
+        <div class="max-w-[1200px] mx-auto lg:px-4 py-10 lg:py-16" id="solutions">
             {/* Header */}
             <div class="mb-12">
                 <div class="inline-flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full mb-6">

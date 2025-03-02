@@ -69,7 +69,7 @@ const KeyFeaturesSection: Component = () => {
     };
 
     return (
-        <div class="bg-[#070C47] rounded-[20px] text-white py-32" id="features">
+        <div class="bg-[#070C47] rounded-[20px] text-white py-16 lg:py-32" id="features">
             <div class="max-w-[1200px] mx-auto px-4">
                 {/* Header */}
                 <div class="mb-12">
@@ -79,7 +79,7 @@ const KeyFeaturesSection: Component = () => {
                             <span class="text-white">Key features</span>
                         </div>
                     </div>
-                    <h2 class="text-[40px] font-medium mb-1">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-medium mb-1">
                         Connect, Analyze, Automate - All in One Place.
                     </h2>
                     <p class="text-[#DEDEDE] mb-8 max-w-2xl">
@@ -93,10 +93,10 @@ const KeyFeaturesSection: Component = () => {
                 {/* Features Grid */}
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-20">
                     {features.map((feature, index) => (
-                        <div class={`w-full rounded-[12px] border border-gradient-to-r from-[#8285CE] to-[#A5A8CC] bg-[#26263C26] backdrop-blur-[100px] p-6 ${index == 0 || index == 3 ? 'lg:col-span-7' : 'lg:col-span-5'}`}>
-                            <h3 class="text-3xl font-medium mb-2">{feature.title}</h3>
+                        <div class={`w-full border rounded-[12px] bg-[#26263C26] backdrop-blur-[100px] p-6 ${index == 0 || index == 3 ? 'lg:col-span-7' : 'lg:col-span-5'} border-[#D2CECE4F]`}>
+                            <h3 class="text-3xl md:text-4xl lg:text-5xl font-medium mb-2">{feature.title}</h3>
                             <p class="text-gray-300 mb-6">{feature.description}</p>
-                            <div class="rounded-lg overflow-hidden">
+                            <div class="rounded-lg">
                                 <img 
                                     src={feature.image} 
                                     alt={feature.title} 
@@ -115,7 +115,7 @@ const KeyFeaturesSection: Component = () => {
                             <span class="text-white">Why FireAI</span>
                         </span>
                     </div>
-                    <h2 class="text-[40px] font-medium mb-4">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-medium mb-4">
                         Turn Data into Growth
                     </h2>
                     <p class="text-gray-300 mb-8 max-w-2xl">
