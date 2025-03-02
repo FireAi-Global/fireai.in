@@ -9,7 +9,7 @@ interface ButtonProps {
 
 const Button: Component<ButtonProps> = (props) => {
   const buttonClass = () => {
-    const baseClass = styles.button;
+    const baseClass = styles.button + "min-w-[160px] w-11/12 lg:w-3/12 rounded-[44px] text-[16px] cursor-pointer p-4 mx-auto lg:mx-0";
     if (props.variant === "secondary") {
       return `${baseClass} ${styles.secondary}`;
     }

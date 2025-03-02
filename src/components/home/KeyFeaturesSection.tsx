@@ -1,4 +1,4 @@
-import { Component } from 'solid-js';
+import { Component, createSignal, createEffect, onCleanup } from 'solid-js';
 import { FireSmartWhite } from '../../assets/icons';
 import { OurSolutions } from '../../assets/landing';
 
@@ -48,7 +48,26 @@ const benefits = [
     }
 ];
 
-const OurSolutionsSection: Component = () => {
+const KeyFeaturesSection: Component = () => {
+    const [currentSlide, setCurrentSlide] = createSignal(0);
+    let timer: number;
+
+    createEffect(() => {
+        timer = setInterval(() => {
+            setCurrentSlide(prev => (prev + 1) % benefits.length);
+        }, 3000);
+
+        onCleanup(() => clearInterval(timer));
+    });
+
+    const handleDotClick = (index: number) => {
+        setCurrentSlide(index);
+        clearInterval(timer);
+        timer = setInterval(() => {
+            setCurrentSlide(prev => (prev + 1) % benefits.length);
+        }, 3000);
+    };
+
     return (
         <div class="bg-[#070C47] rounded-[20px] text-white py-32" id="features">
             <div class="max-w-[1200px] mx-auto px-4">
@@ -66,16 +85,16 @@ const OurSolutionsSection: Component = () => {
                     <p class="text-[#DEDEDE] mb-8 max-w-2xl">
                         FireAI integrates with your business tools, turning scattered data into smart insights. Make faster decisions, optimize workflows and stay ahead with predictive analytics.
                     </p>
-                    <button class="w-[151px] h-[42px] px-2 py-[10px] rounded-[8px] text-white bg-gradient-to-r from-[#0915A0] to-[#0169FD] border border-[#E4E3FF] shadow-[0_4px_12px_0_#9E9C9C1A]">
+                    <button class="hidden lg:block w-[151px] h-[42px] px-2 py-[10px] rounded-[8px] text-white bg-gradient-to-r from-[#0915A0] to-[#0169FD] border border-[#E4E3FF] shadow-[0_4px_12px_0_#9E9C9C1A]">
                         Get a demo
                     </button>
                 </div>
 
                 {/* Features Grid */}
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
-                    {features.map(feature => (
-                        <div class="rounded-[12px] border border-gradient-to-r from-[#8285CE] to-[#A5A8CC] bg-[#26263C26] backdrop-blur-[100px] p-6">
-                            <h3 class="text-xl font-medium mb-2">{feature.title}</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-20">
+                    {features.map((feature, index) => (
+                        <div class={`w-full rounded-[12px] border border-gradient-to-r from-[#8285CE] to-[#A5A8CC] bg-[#26263C26] backdrop-blur-[100px] p-6 ${index == 0 || index == 3 ? 'lg:col-span-7' : 'lg:col-span-5'}`}>
+                            <h3 class="text-3xl font-medium mb-2">{feature.title}</h3>
                             <p class="text-gray-300 mb-6">{feature.description}</p>
                             <div class="rounded-lg overflow-hidden">
                                 <img 
@@ -104,35 +123,89 @@ const OurSolutionsSection: Component = () => {
                     </p>
                 </div>
 
-                {/* Benefits Grid */}
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    {benefits.map(benefit => (
-                        <div 
-                            class="rounded-[20px] p-6"
-                            style={{
-                                "background": "linear-gradient(180deg, rgba(20, 20, 38, 0.7) 0%, rgba(20, 20, 38, 0.3) 100%)",
-                                "border": "1px solid rgba(130, 133, 206, 0.1)",
-                                "backdrop-filter": "blur(20px)",
-                                "-webkit-backdrop-filter": "blur(20px)"
-                            }}
-                        >
-                            <div class="mb-4">
-                                {/* Icon container with dark background */}
-                                <div class="flex items-center" 
-                                    style={{
-                                        "background": "linear-gradient(180deg, rgba(20, 20, 38, 0.9) 0%, rgba(20, 20, 38, 0.4) 100%)"
-                                    }}>
-                                    <img src={benefit.icon} alt={benefit.title} class="w-[60px] h-[60px]" />
+                {/* Desktop Grid */}
+                <div class="hidden lg:grid grid-cols-12 gap-6">
+                    {benefits.map((benefit) => (
+                        <div class="col-span-12 lg:col-span-3">
+                            <div 
+                                class="rounded-[20px] p-6"
+                                style={{
+                                    "background": "linear-gradient(180deg, rgba(20, 20, 38, 0.7) 0%, rgba(20, 20, 38, 0.3) 100%)",
+                                    "border": "1px solid rgba(130, 133, 206, 0.1)",
+                                    "backdrop-filter": "blur(20px)",
+                                    "-webkit-backdrop-filter": "blur(20px)"
+                                }}
+                            >
+                                <div class="mb-4">
+                                    <div class="flex items-center" 
+                                        style={{
+                                            "background": "linear-gradient(180deg, rgba(20, 20, 38, 0.9) 0%, rgba(20, 20, 38, 0.4) 100%)"
+                                        }}>
+                                        <img src={benefit.icon} alt={benefit.title} class="w-[60px] h-[60px]" />
+                                    </div>
                                 </div>
+                                <h3 class="text-[20px] font-medium mb-3 text-white">{benefit.title}</h3>
+                                <p class="text-[#A1A1A1] text-[15px] leading-[22px]">{benefit.description}</p>
                             </div>
-                            <h3 class="text-[20px] font-medium mb-3 text-white">{benefit.title}</h3>
-                            <p class="text-[#A1A1A1] text-[15px] leading-[22px]">{benefit.description}</p>
                         </div>
                     ))}
+                </div>
+
+                {/* Mobile Carousel */}
+                <div class="lg:hidden">
+                    <div 
+                        class="rounded-[20px] p-6"
+                        style={{
+                            "background": "linear-gradient(180deg, rgba(20, 20, 38, 0.7) 0%, rgba(20, 20, 38, 0.3) 100%)",
+                            "border": "1px solid rgba(130, 133, 206, 0.1)",
+                            "backdrop-filter": "blur(20px)",
+                            "-webkit-backdrop-filter": "blur(20px)"
+                        }}
+                    >
+                        <div class="mb-4">
+                            <div class="flex items-center" 
+                                style={{
+                                    "background": "linear-gradient(180deg, rgba(20, 20, 38, 0.9) 0%, rgba(20, 20, 38, 0.4) 100%)"
+                                }}>
+                                <img 
+                                    src={benefits[currentSlide()].icon} 
+                                    alt={benefits[currentSlide()].title} 
+                                    class="w-[60px] h-[60px]" 
+                                />
+                            </div>
+                        </div>
+                        <h3 class="text-[20px] font-medium mb-3 text-white">
+                            {benefits[currentSlide()].title}
+                        </h3>
+                        <p class="text-[#A1A1A1] text-[15px] leading-[22px]">
+                            {benefits[currentSlide()].description}
+                        </p>
+                    </div>
+
+                    {/* Mobile Carousel Navigation */}
+                    <div class="flex justify-center items-center gap-2 mt-6">
+                        {benefits.map((_, index) => (
+                            <div
+                                class={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                                    index === currentSlide() 
+                                        ? "w-8 bg-[#2B4EE7]" 
+                                        : "w-2 bg-[#A1A1A1]"
+                                }`}
+                                onClick={() => handleDotClick(index)}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Get a demo button */}
+                    <div class="mt-8">
+                        <button class="w-full py-4 px-6 bg-[#2B4EE7] text-white rounded-full text-[16px] font-medium">
+                            Get a demo
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default OurSolutionsSection;
+export default KeyFeaturesSection;
