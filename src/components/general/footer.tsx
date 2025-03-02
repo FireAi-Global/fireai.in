@@ -42,11 +42,11 @@ const footerLinks = [
 
 const Footer: Component = () => {
   return (
-    <footer class="max-w-[1200px] mx-auto py-6 px-6 mt-10">
+    <footer class="max-w-[1200px] mx-auto py-6 px-6 mt-20">
       {/* Top Row */}
       <div class="flex flex-col lg:flex-row justify-start lg:justify-between lg:items-center">
         <div class="flex items-center gap-2 mb-8 lg:mb-0">
-          <img src={CompanyLogo} alt="FireAI" class="h-16 lg:h-12" />
+          <img src={CompanyLogo} alt="FireAI" class="h-12" />
         </div>
         <div class="flex items-center gap-10 lg:gap-6 pl-2 lg:pl-0">
           {socialLinks.map((social) => (

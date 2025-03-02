@@ -3,7 +3,7 @@ import type { Component } from "solid-js";
 
 const App: Component = () => {
   return (
-    <div class="py-5 px-5 md:px-18">
+    <div class="lg:py-5 px-0 lg:px-18">
       <HeroSection />
       <ClientSection />
       <CarouselSection />

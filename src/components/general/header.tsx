@@ -17,11 +17,11 @@ const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = createSignal(false);
 
     return (
-        <header class="fixed top-2 lg:top-4 left-0 right-0 bg-white z-50 w-[85%] md:w-9/12 rounded-[12px] mx-auto h-[66px]">
+        <header class="fixed top-2 lg:top-4 left-0 right-0 bg-white z-50 w-[85%] md:w-9/12 rounded-[34px] mx-auto h-[66px]">
             <nav class="max-w-[1200px] mx-auto px-4 py-4 flex justify-between items-center">
                 {/* Logo */}
                 <a href="/" class="flex items-center">
-                    <img src={CompanyLogo} alt="FireAI Logo" class="h-8" />
+                    <img src={CompanyLogo} alt="FireAI Logo" class="h-7 lg:h-8" />
                 </a>
 
                 {/* Desktop Navigation */}
@@ -44,7 +44,7 @@ const Header: Component = () => {
 
                 {/* Mobile Navigation */}
                 <div class="flex lg:hidden items-center gap-4">
-                    <a href="/demo" class="bg-[#2B4EE7] text-white px-4 py-2 rounded-lg hover:bg-[#2342CC]">
+                    <a href="/demo" class="bg-[#2B4EE7] text-white px-4 py-1.5 rounded-[44px] lg:rounded-lg hover:bg-[#2342CC]">
                         Get a demo
                     </a>
                     <button 

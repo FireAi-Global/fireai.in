@@ -1,6 +1,7 @@
 import { Component, createSignal, createEffect, onCleanup } from "solid-js";
 import { FireSmartWhite } from "../../assets/icons";
 import { OurSolutions } from "../../assets/landing";
+import { Motion } from "solid-motionone";
 
 const features = [
   {
@@ -75,7 +76,7 @@ const KeyFeaturesSection: Component = () => {
 
   return (
     <div
-      class="bg-[#070C47] rounded-[20px] text-white py-16 lg:py-32"
+      class="bg-[#070C47] lg:rounded-[20px] text-white py-16 lg:py-32"
       id="features"
     >
       <div class="max-w-[1200px] mx-auto px-4">
@@ -106,8 +107,16 @@ const KeyFeaturesSection: Component = () => {
         {/* Features Grid */}
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-20">
           {features.map((feature, index) => (
-            <div
+            <Motion.div
               class={`w-full border rounded-[12px] bg-[#26263C26] backdrop-blur-[100px] p-6 ${index == 0 || index == 3 ? "lg:col-span-7" : "lg:col-span-5"} border-[#D2CECE4F]`}
+              animate={{
+                opacity: [0, 1],
+                y: [10, 0],
+              }}
+              transition={{
+                duration: 1,
+                easing: "ease-in-out",
+              }}
             >
               <h3 class="text-3xl md:text-2xl font-medium mb-2">
                 {feature.title}
@@ -116,7 +125,7 @@ const KeyFeaturesSection: Component = () => {
               <div class="rounded-lg">
                 <img src={feature.image} alt={feature.title} class="w-full" />
               </div>
-            </div>
+            </Motion.div>
           ))}
         </div>
 

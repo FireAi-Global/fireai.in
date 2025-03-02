@@ -1,10 +1,21 @@
-import { Component } from 'solid-js';
+import { Component } from "solid-js";
 import { HeroImage } from "../../assets/landing";
 import Button from "../general/buttons";
+import { Motion } from "solid-motionone";
 
 const HeroSection: Component = () => {
   return (
-    <div class="rounded-[20px] bg-gray-100 flex flex-col text-center">
+    <Motion.div
+      class="rounded-0 lg:rounded-[20px] bg-gray-100 flex flex-col text-center px-5 lg:px-0"
+      animate={{
+        opacity: [0, 1],
+        y: [10, 0],
+      }}
+      transition={{
+        duration: 1,
+        easing: "ease-in-out",
+      }}
+    >
       <div class="mx-auto w-full md:w-8/12">
         <h2 class="text-3xl md:text-4xl lg:text-5xl pt-30 font-medium">
           From Data Overload to <span class="text-blue-400">AI-Powered</span>
@@ -18,13 +29,18 @@ const HeroSection: Component = () => {
         </h3>
         <div class="flex flex-col lg:flex-row gap-4 justify-center mt-10">
           <Button variant="primary">Get a demo</Button>
-          <Button variant="secondary" onClick={() => window.open('https://dashboard.fireai.in', '_blank')}>Sign Up</Button>
+          <Button
+            variant="secondary"
+            onClick={() => window.open("https://dashboard.fireai.in", "_blank")}
+          >
+            Sign Up
+          </Button>
         </div>
         <div class="m-0">
           <img src={HeroImage} alt="Hero Dashboard" />
         </div>
       </div>
-    </div>
+    </Motion.div>
   );
 };
 

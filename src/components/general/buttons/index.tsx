@@ -1,5 +1,6 @@
 import { Component, JSX } from "solid-js";
 import styles from "./ButtonStyle.module.scss";
+import { Motion } from "solid-motionone";
 
 interface ButtonProps {
   children: JSX.Element;
@@ -17,9 +18,20 @@ const Button: Component<ButtonProps> = (props) => {
   };
 
   return (
-    <button onClick={props.onClick} class={buttonClass()}>
+    <Motion.button
+      onClick={props.onClick}
+      class={buttonClass()}
+      animate={{
+        opacity: [0, 1],
+        x: props.variant === "secondary" ? [100, 0] : [-100, 0],
+      }}
+      transition={{
+        duration: 1,
+        easing: "ease-in-out",
+      }}
+    >
       {props.children}
-    </button>
+    </Motion.button>
   );
 };
 

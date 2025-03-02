@@ -10,6 +10,8 @@ const clientLogos = [
 ];
 
 const ClientSection: Component = () => {
+  const duplicatedLogos = [...clientLogos, ...clientLogos];
+
   return (
     <div class="max-w-[1200px] mx-auto py-16 px-4 text-center">
       <h2 class="text-[20px] font-medium text-gray-800 mb-12">
@@ -28,16 +30,15 @@ const ClientSection: Component = () => {
       </div>
 
       {/* Mobile Marquee */}
-      <div class="lg:hidden relative overflow-hidden w-full">
-        <div class="flex animate-scroll">
-          <div class="flex min-w-full justify-around items-center">
-            {clientLogos.map((logo) => (
-              <img src={logo.src} alt={logo.alt} class="h-8 object-contain" />
-            ))}
-          </div>
-          <div class="flex min-w-full justify-around items-center">
-            {clientLogos.map((logo) => (
-              <img src={logo.src} alt={logo.alt} class="h-8 object-contain" />
+      <div class="lg:hidden relative w-full overflow-hidden">
+        <div class="overflow-hidden">
+          <div class="flex items-center">
+            {duplicatedLogos.map((logo) => (
+              <img 
+                src={logo.src} 
+                alt={logo.alt} 
+                class="h-5 object-contain mr-12" 
+              />
             ))}
           </div>
         </div>

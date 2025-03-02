@@ -3,7 +3,7 @@ import { PreFooterImage } from "../../assets/landing"
 
 const PreFooterSection: Component = () => {
     return (
-        <div class="bg-[#070C47] rounded-[32px] overflow-hidden">
+        <div class="bg-[#070C47] lg:rounded-[32px] overflow-hidden">
             <div class="max-w-[1200px] mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 items-center">
                     {/* Left Content */}
