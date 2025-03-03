@@ -1,35 +1,11 @@
 import { createSignal } from "solid-js";
-import { Carousel } from "../../assets/landing";
-import { FireSmart } from "../../assets/icons";
+import { Carousel } from "../../../assets/landing";
+import { FireSmart } from "../../../assets/icons";
 import { Motion } from "solid-motionone";
+import slides from "../../../data/home/ourSolutions";
 
 const CarouselSection = () => {
   const [currentSlide, setCurrentSlide] = createSignal(0);
-
-  const slides = [
-    {
-      title: "Turn Data Chaos into clarity",
-      heading: "Extend or Integrate with your favourite tools",
-      description:
-        "Start as a basic task tracking tool. Customize your work-flows based on Backlog, Unstarted, Started, Completed issues, in just a few seconds, and view it as you like.",
-      features: [
-        "Visualize as you like. Switch between List, Kanban, or Calendar across any views within clicks.",
-        "Visualize as you like. Switch between List, Kanban, or Calendar across any views within clicks.",
-      ],
-      image: Carousel.Frame1,
-    },
-    {
-      title: "Bla Bla into Bla Bla",
-      heading: "BLa Bla",
-      description:
-        "Start as a basic task tracking tool. Customize your work-flows based on Backlog, Unstarted, Started, Completed issues, in just a few seconds, and view it as you like.",
-      features: [
-        "Visualize as you like. Switch between List, Kanban, or Calendar across any views within clicks.",
-        "Visualize as you like. Switch between List, Kanban, or Calendar across any views within clicks.",
-      ],
-      image: Carousel.Frame1,
-    },
-  ];
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);

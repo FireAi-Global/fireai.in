@@ -1,5 +1,5 @@
 import { Component } from 'solid-js';
-import { PreFooterImage } from "../../assets/landing"
+import { PreFooterImage } from "../../../assets/landing"
 
 const PreFooterSection: Component = () => {
     return (

@@ -1,4 +1,4 @@
-import { HeroSection, ClientSection, CarouselSection, HowFireAiWorks, OurSolutionsSections, FAQsSection, PreFooterSection } from "../components/home";
+import { HeroSection, ClientSection, CarouselSection, HowFireAiWorks, OurSolutionsSections, FAQsSection, PreFooterSection } from "../components/pages/home";
 import type { Component } from "solid-js";
 
 const App: Component = () => {

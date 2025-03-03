@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
-import { HeroImage } from "../../assets/landing";
-import Button from "../general/buttons";
+import { HeroImage } from "../../../assets/landing";
+import Button from "../../general/buttons";
 import { Motion } from "solid-motionone";
 
 const HeroSection: Component = () => {
