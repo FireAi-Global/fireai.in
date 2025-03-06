@@ -3,7 +3,8 @@ import { FireSmartWhite } from "../../../assets/icons";
 import { CompanyThemeGradient } from "../../../assets/company";
 import { Motion } from "solid-motionone";
 import { benefits, features } from "../../../data/home/keyFeatures";
-
+import Button from "../../general/buttons";
+import links from "../../../data/links";
 
 
 const KeyFeaturesSection: Component = () => {
@@ -57,9 +58,9 @@ const KeyFeaturesSection: Component = () => {
             into smart insights. Make faster decisions, optimize workflows and
             stay ahead with predictive analytics.
           </p>
-          <button class="hidden lg:block w-[151px] h-[42px] px-2 py-[10px] rounded-[8px] text-white bg-gradient-to-r from-[#0915A0] to-[#0169FD] border border-[#E4E3FF] shadow-[0_4px_12px_0_#9E9C9C1A]">
+          <Button variant="primary" size="large" onClick={() => window.open(links.demoLink, "_blank")}>
             Get a demo
-          </button>
+          </Button>
         </div>
 
         {/* Features Grid */}
@@ -197,9 +198,9 @@ const KeyFeaturesSection: Component = () => {
 
           {/* Get a demo button */}
           <div class="mt-8">
-            <button class="w-full py-4 px-6 bg-[#2B4EE7] text-white rounded-full text-[16px] font-medium">
+            <Button variant="primary" size="large" onClick={() => window.open(links.demoLink, "_blank")}>
               Get a demo
-            </button>
+            </Button>
           </div>
         </div>
       </div>

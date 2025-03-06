@@ -2,6 +2,8 @@ import { Component, createSignal } from "solid-js";
 import { FireSmart } from "../../../assets/icons";
 import cards from "../../../data/home/howFireAiWorks";
 import { Overlay } from "../../../assets/landing/howFireAIWorks";
+import Button from "../../general/buttons";
+import links from "../../../data/links";
 const HowFireAiWorksSection: Component = () => {
   const [currentSlide, setCurrentSlide] = createSignal(0);
 
@@ -17,9 +19,9 @@ const HowFireAiWorksSection: Component = () => {
             How FireAI Works
           </h2>
         </div>
-        <button class="hidden lg:block bg-[#2B4EE7] text-white px-6 py-3 rounded-[12px] my-auto">
+        <Button variant="primary" size="medium" onClick={() => window.open(links.demoLink, "_blank")}>
           Get a demo
-        </button>
+        </Button>
       </div>
 
       {/* Desktop Grid */}

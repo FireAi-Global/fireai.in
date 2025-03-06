@@ -1,6 +1,8 @@
 import { Component } from 'solid-js';
 import { PreFooter } from "../../../assets/landing"
 import { CompanyThemeGradient } from '../../../assets/company';
+import Button from '../../general/buttons';
+import links from '../../../data/links';
 
 const PreFooterSection: Component = () => {
     return (
@@ -24,11 +26,13 @@ const PreFooterSection: Component = () => {
                         <p class="text-[#DEDEDE] text-[18px] leading-[1.6] mb-8 max-w-[480px]">
                             Make real-time, data-backed decisions and stay ahead of the competition.
                         </p>
-                        <button
-                            class="w-[151px] h-[42px] px-2 py-[10px] rounded-[8px] text-white bg-gradient-to-r from-[#0915A0] to-[#0169FD] border border-[#E4E3FF] shadow-[0_4px_12px_0_#9E9C9C1A]"
+                        <Button
+                            variant="primary"
+                            size="large"
+                            onClick={() => window.open(links.demoLink, "_blank")}
                         >
                             Get a demo
-                        </button>
+                        </Button>
                     </div>
 
                     {/* Right Image */}

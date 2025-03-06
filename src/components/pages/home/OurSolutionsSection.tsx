@@ -67,7 +67,7 @@ const CarouselSection = () => {
             <img
               src={slides[currentSlide()].image}
               alt="Solution preview"
-              class="rounded-lg shadow-lg w-full"
+              class="rounded-lg w-full"
             />
           </div>
         </div>

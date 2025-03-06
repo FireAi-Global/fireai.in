@@ -1,26 +1,27 @@
 import { Component } from "solid-js";
 import { CompanyLogo } from "../../assets/company/index";
 import { Facebook, Instagram, LinkedIn, Twitter } from "../../assets/icons";
+import links from "../../data/links";
 
 const socialLinks = [
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/company/fireaiglobal/",
+    href: links.socialLinks.linkedin,
     icon: LinkedIn,
   },
   {
     name: "Facebook",
-    href: "https://facebook.com/fireai",
+    href: links.socialLinks.facebook,
     icon: Facebook,
   },
   {
     name: "Instagram",
-    href: "https://www.instagram.com/fireaiglobal/",
+    href: links.socialLinks.instagram,
     icon: Instagram,
   },
   {
     name: "Twitter",
-    href: "https://x.com/FireAiglobal",
+    href: links.socialLinks.twitter,
     icon: Twitter,
   },
 ];
@@ -28,15 +29,15 @@ const socialLinks = [
 const footerLinks = [
   {
     name: "Support",
-    href: "/support",
+    href: links.helperLinks.support,
   },
   {
     name: "Privacy Policy",
-    href: "/privacy",
+    href: links.helperLinks.privacy,
   },
   {
     name: "Terms & Conditions",
-    href: "/terms",
+    href: links.helperLinks.terms,
   },
 ];
 

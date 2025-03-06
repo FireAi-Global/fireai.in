@@ -2,6 +2,8 @@
 import { render } from "solid-js/web";
 import { Route, Router } from "@solidjs/router";
 import Layout from "./Layout";
+import Clarity from '@microsoft/clarity';
+import config from "./data/config";
 
 import "./index.css";
 import App from "./pages/Home";
@@ -14,11 +16,15 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
+Clarity.init(config.clarity.id);
+
 render(
   () => (
-    <Router root={Layout}>
-      <Route path="/" component={App} />
-    </Router>
+    <>
+      <Router root={Layout}>
+        <Route path="/" component={App} />
+      </Router>
+    </>
   ),
   root!,
 );

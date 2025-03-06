@@ -1,6 +1,7 @@
 import { Component, createSignal } from 'solid-js';
 import { CompanyLogo } from '../../assets/company';
 import Button from './buttons';
+import links from '../../data/links';
 
 const navLinks = [
     { name: "Our Solutions", href: "#solutions" },
@@ -12,12 +13,12 @@ const navLinks = [
 const actionLinks = [
     { 
         name: "Login", 
-        href: "https://dashboard.fireai.in",
+        href: links.applicationLinks.login,
         variant: "secondary"
     },
     { 
         name: "Get a demo", 
-        href: "/demo", 
+        href: links.demoLink, 
         variant: "primary"
     }
 ];
@@ -26,7 +27,7 @@ const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = createSignal(false);
 
     return (
-        <header class="fixed top-2 lg:top-6 left-0 right-0 bg-white z-50 w-[85%] md:w-9/12 rounded-[34px] mx-auto">
+        <header class="fixed top-2 lg:top-6 left-0 right-0 bg-white z-50 w-[85%] md:w-9/12 rounded-[12px] mx-auto border border-[#F4F4F4]">
             <nav class="h-[66px] max-w-[1200px] mx-auto px-6 flex justify-between items-center">
                 {/* Logo */}
                 <a href="/" class="flex items-center h-full">
@@ -78,7 +79,7 @@ const Header: Component = () => {
 
             {/* Mobile Menu */}
             {isMenuOpen() && (
-                <div class="lg:hidden absolute top-full left-0 right-0 bg-white mt-2 p-4 rounded-lg shadow-lg">
+                <div class="lg:hidden absolute top-full left-0 right-0 bg-white mt-2 p-4 rounded-lg">
                     {navLinks.map(link => (
                         <a href={link.href} class="block py-2 text-gray-600 hover:text-gray-900" onClick={() => setIsMenuOpen(false)}>
                             {link.name}
