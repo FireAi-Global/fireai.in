@@ -58,9 +58,9 @@ const KeyFeaturesSection: Component = () => {
             into smart insights. Make faster decisions, optimize workflows and
             stay ahead with predictive analytics.
           </p>
-          <Button variant="primary" size="large" onClick={() => window.open(links.demoLink, "_blank")}>
+          {/* <Button variant="primary" size="large" onClick={() => window.open(links.demoLink, "_blank")}>
             Get a demo
-          </Button>
+          </Button> */}
         </div>
 
         {/* Features Grid */}
@@ -197,11 +197,11 @@ const KeyFeaturesSection: Component = () => {
           </div>
 
           {/* Get a demo button */}
-          <div class="mt-8 flex justify-center">
+          {/* <div class="mt-8 flex justify-center">
             <Button variant="primary" size="large" onClick={() => window.open(links.demoLink, "_blank")}>
               Get a demo
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

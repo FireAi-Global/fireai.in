@@ -12,9 +12,9 @@ const links = {
     twitter: "https://x.com/FireAiglobal",
   },
   helperLinks: {
-    support: "/support",
-    privacy: "/privacy",
-    terms: "/terms",
+    support: "/",
+    privacy: "/",
+    terms: "/",
   },
 };
 
