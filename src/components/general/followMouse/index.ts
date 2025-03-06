@@ -10,6 +10,13 @@ const FollowCursor: Component<FollowCursorProps> = (props) => {
   const color = props.color || '#C1BFE8a6';
 
   createEffect(() => {
+    // Check if screen is mobile/small
+    const isMobileScreen = () => window.innerWidth < 768; // 768px is typical md breakpoint
+
+    if (isMobileScreen()) {
+      return; // Don't initialize on mobile screens
+    }
+
     let canvas: HTMLCanvasElement;
     let context: CanvasRenderingContext2D | null;
     let animationFrame: number;
@@ -58,9 +65,17 @@ const FollowCursor: Component<FollowCursorProps> = (props) => {
     const onWindowResize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
+      
+      if (isMobileScreen()) {
+        destroy(); // Remove effect if screen becomes too small
+        return;
+      }
+      
       if (canvas) {
         canvas.width = width;
         canvas.height = height;
+      } else {
+        init(); // Reinitialize if screen becomes large enough
       }
     };
 
@@ -77,8 +92,8 @@ const FollowCursor: Component<FollowCursorProps> = (props) => {
     };
 
     const init = () => {
-      if (prefersReducedMotion.matches) {
-        console.log('Reduced motion enabled, cursor effect skipped.');
+      if (prefersReducedMotion.matches || isMobileScreen()) {
+        console.log('Effect disabled due to reduced motion preference or small screen.');
         return;
       }
 

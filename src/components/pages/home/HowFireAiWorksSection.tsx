@@ -19,25 +19,27 @@ const HowFireAiWorksSection: Component = () => {
             How FireAI Works
           </h2>
         </div>
-        <Button variant="primary" size="medium" onClick={() => window.open(links.demoLink, "_blank")}>
-          Get a demo
-        </Button>
+        <div class="hidden lg:block">
+          <Button variant="primary" size="medium" onClick={() => window.open(links.demoLink, "_blank")}>
+            Get a demo
+          </Button>
+        </div>
       </div>
 
       {/* Desktop Grid */}
       <div class="hidden lg:grid grid-cols-4 gap-8">
         {cards.map((card, index) => (
           <div class="text-center w-[280px] rounded-[20px] relative overflow-hidden">
-            <div 
+            <div
               class="absolute inset-0 z-[1]"
               style={{
                 "background": `url(${card.background}) no-repeat center center`,
                 "background-size": "cover",
               }}
             />
-            <img 
-              src={Overlay} 
-              alt="Overlay" 
+            <img
+              src={Overlay}
+              alt="Overlay"
               class="absolute bottom-0 left-0 w-full h-[50%] z-20"
             />
             <div class="relative z-30 px-6">

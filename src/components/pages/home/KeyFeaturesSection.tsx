@@ -197,7 +197,7 @@ const KeyFeaturesSection: Component = () => {
           </div>
 
           {/* Get a demo button */}
-          <div class="mt-8">
+          <div class="mt-8 flex justify-center">
             <Button variant="primary" size="large" onClick={() => window.open(links.demoLink, "_blank")}>
               Get a demo
             </Button>

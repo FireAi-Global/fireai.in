@@ -63,9 +63,9 @@ const Header: Component = () => {
 
                 {/* Mobile Navigation */}
                 <div class="flex lg:hidden items-center gap-4 h-full">
-                    <a href="/demo" class="flex items-center justify-center h-[38px] bg-[#2B4EE7] text-white px-4 rounded-[44px] hover:bg-[#2342CC]">
+                    <Button variant="primary" size="small" onClick={() => window.open(links.demoLink, "_blank")}>
                         Get a demo
-                    </a>
+                    </Button>
                     <button 
                         onClick={() => setIsMenuOpen(!isMenuOpen())}
                         class="text-gray-600 hover:text-gray-900"
