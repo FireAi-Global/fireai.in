@@ -6,7 +6,12 @@ import { Motion } from "solid-motionone";
 const HeroSection: Component = () => {
   return (
     <Motion.div
-      class="rounded-0 lg:rounded-[20px] bg-gray-100 flex flex-col text-center px-5 lg:px-0"
+      class="rounded-0 lg:rounded-[20px] flex flex-col text-center px-5 lg:px-0"
+      style={{
+        "background-image": `url(${Hero.HeroBackground})`,
+        "background-size": "cover",
+        "background-position": "center",
+      }}
       animate={{
         opacity: [0, 1],
         y: [10, 0],
@@ -36,7 +41,7 @@ const HeroSection: Component = () => {
             Login
           </Button>
         </div>
-        <div class="m-0">
+        <div class="m-0 px-10">
           <img src={Hero.HeroImage} alt="Hero Dashboard" />
         </div>
       </div>

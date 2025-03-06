@@ -28,26 +28,26 @@ const features = [
 const benefits = [
   {
     icon: OurSolutions.BenefitsOne,
-    title: "One-Stop-Analytics",
+    title: "The AI Brain for Business",
     description:
-      "A complete view of your business with real-time dashboards, reports and trends in one place.",
+      "FireAI isn't just a tool but an intelligent engine that powers data-driven decisions with real-time insights.",
   },
   {
     icon: OurSolutions.BenefitsTwo,
-    title: "Smarter Forecasting",
-    description: "Predict sales, revenue, and trends with 30% better accuracy.",
+    title: "A True AI Engine, Not Just a Wrapper",
+    description: "Built from the ground up, FireAI delivers AI-powered analytics without relying on third-party BI tools.",
   },
   {
     icon: OurSolutions.BenefitsThree,
-    title: "Smart Decisions",
+    title: "Voice-Powered, Multilingual Insights",
     description:
-      "Save time and reduce manual effort by 40% with automated recommendations.",
+      "With Bhashini integration, ask questions in any language and get instant, AI-driven answers.",
   },
   {
     icon: OurSolutions.BenefitsFour,
-    title: "Real-Tim Alerts",
+    title: "AI That Thinks Ahead",
     description:
-      "Get real-time notifications on risks, opportunities and business changes, before they impact you.",
+      "Identifies patterns, predicts trends, and flags risks before they impact your business.",
   },
 ];
 

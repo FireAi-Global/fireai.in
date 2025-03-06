@@ -1,4 +1,5 @@
 import { Component, createSignal } from "solid-js";
+import { Plus, Minus } from "../../../assets/icons";
 
 const FAQItem: Component<{ question: string; answer: string }> = (props) => {
   const [isOpen, setIsOpen] = createSignal(false);
@@ -11,9 +12,9 @@ const FAQItem: Component<{ question: string; answer: string }> = (props) => {
     >
       <div class="flex justify-between items-center">
         <h3 class="text-base text-black">{props.question}</h3>
-        <button class="text-blue-500 w-4 h-4 lg:w-8 lg:h-8 min-w-[28px] min-h-[28px] flex items-center justify-center rounded-full border border-blue-500">
+        <button class="text-blue-500 w-4 h-4 lg:w-8 lg:h-8 min-w-[28px] min-h-[28px] flex items-center justify-center">
           <span class="text-xl leading-none mb-[2px]">
-            {isOpen() ? "-" : "+"}
+            {isOpen() ? <img src={Minus} alt="Minus" /> : <img src={Plus} alt="Plus" />}
           </span>
         </button>
       </div>

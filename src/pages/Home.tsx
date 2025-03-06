@@ -1,14 +1,15 @@
-import { HeroSection, ClientSection, CarouselSection, HowFireAiWorks, OurSolutionsSections, FAQsSection, PreFooterSection } from "../components/pages/home";
+import { HeroSection, ClientSection, CarouselSection, HowFireAiWorks, OurSolutionsSections, FAQsSection, MultilingualSection, PreFooterSection } from "../components/pages/home";
 import type { Component } from "solid-js";
 
 const App: Component = () => {
   return (
-    <div class="lg:py-5 px-0 lg:px-18">
+    <div class="lg:py-3 px-0 lg:px-18">
       <HeroSection />
       <ClientSection />
       <CarouselSection />
       <HowFireAiWorks />
       <OurSolutionsSections />
+      <MultilingualSection />
       <FAQsSection />
       <PreFooterSection />
     </div>

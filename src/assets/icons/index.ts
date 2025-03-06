@@ -4,5 +4,7 @@ import Twitter from "./twitter.svg";
 import Facebook from "./facebook.svg";
 import Instagram from "./instagram.svg";
 import LinkedIn from "./linkedin.svg";
+import Plus from "./plus.svg"
+import Minus from "./minus.svg"
 
-export { FireSmart, FireSmartWhite, Twitter, Facebook, Instagram, LinkedIn };
+export { FireSmart, FireSmartWhite, Twitter, Facebook, Instagram, LinkedIn, Plus, Minus };

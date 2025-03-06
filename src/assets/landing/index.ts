@@ -3,7 +3,8 @@ import * as Clients from "./clients";
 import * as Carousel from "./carousel";
 import * as HowFireAiWorks from "./howFireAIWorks";
 import * as OurSolutions from "./ourSolutions";
-import PreFooterImage from "./preFooter/image.png";
+import * as Multilingual from "./multilingual";
+import * as PreFooter from "./preFooter";
 
 export {
   Hero,
@@ -11,5 +12,6 @@ export {
   Carousel,
   HowFireAiWorks,
   OurSolutions,
-  PreFooterImage,
+  Multilingual,
+  PreFooter
 };

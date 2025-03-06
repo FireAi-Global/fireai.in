@@ -1,5 +1,6 @@
 import { Component, createSignal, createEffect, onCleanup } from "solid-js";
 import { FireSmartWhite } from "../../../assets/icons";
+import { CompanyThemeGradient } from "../../../assets/company";
 import { Motion } from "solid-motionone";
 import { benefits, features } from "../../../data/home/keyFeatures";
 
@@ -27,7 +28,13 @@ const KeyFeaturesSection: Component = () => {
 
   return (
     <div
-      class="bg-[#070C47] lg:rounded-[20px] text-white py-16 lg:py-32"
+      class="lg:rounded-[20px] text-white py-16 lg:py-32"
+      style={{
+        "background-image": `url(${CompanyThemeGradient})`,
+        "background-size": 'cover',
+        "background-position": 'center',
+        "background-repeat": 'no-repeat',
+      }}
       id="features"
     >
       <div class="max-w-[1200px] mx-auto px-4">
@@ -100,18 +107,17 @@ const KeyFeaturesSection: Component = () => {
             insights.
           </p>
         </div>
-
         {/* Desktop Grid */}
         <div class="hidden lg:grid grid-cols-12 gap-6">
           {benefits.map((benefit) => (
             <div class="col-span-12 lg:col-span-3">
               <div
-                class="rounded-[20px] p-6 min-h-[260px]"
+                class="rounded-[20px] p-6 h-[300px]"
                 style={{
                   background:
                     "linear-gradient(180deg, rgba(20, 20, 38, 0.7) 0%, rgba(20, 20, 38, 0.3) 100%)",
                   border: "1px solid rgba(130, 133, 206, 0.1)",
-                  "backdrop-filter": "blur(20px)",
+                  "backdrop-filter": "blur(20px)", 
                   "-webkit-backdrop-filter": "blur(20px)",
                 }}
               >
@@ -180,11 +186,10 @@ const KeyFeaturesSection: Component = () => {
           <div class="flex justify-center items-center gap-2 mt-6">
             {benefits.map((_, index) => (
               <div
-                class={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  index === currentSlide()
+                class={`h-2 rounded-full transition-all duration-300 cursor-pointer ${index === currentSlide()
                     ? "w-8 bg-[#2B4EE7]"
                     : "w-2 bg-[#A1A1A1]"
-                }`}
+                  }`}
                 onClick={() => handleDotClick(index)}
               />
             ))}
