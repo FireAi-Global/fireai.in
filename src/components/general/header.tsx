@@ -4,10 +4,10 @@ import Button from './buttons';
 import links from '../../data/links';
 
 const navLinks = [
-    { name: "Our Solutions", href: "#solutions" },
-    { name: "How it works", href: "#how-it-works" },
-    { name: "Features", href: "#features" },
-    { name: "FAQ", href: "#faq" }
+    { name: "Our Solutions", href: "/#solutions" },
+    { name: "How it works", href: "/#how-it-works" },
+    { name: "Features", href: "/#features" },
+    { name: "FAQ", href: "/#faq" }
 ];
 
 const actionLinks = [

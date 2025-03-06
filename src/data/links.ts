@@ -14,7 +14,7 @@ const links = {
   helperLinks: {
     support: "/",
     privacy: "/",
-    terms: "/",
+    terms: "/terms",
   },
 };
 

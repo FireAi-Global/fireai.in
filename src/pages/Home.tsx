@@ -1,4 +1,4 @@
-import FollowCursor from "../components/general/followMouse";
+// import FollowCursor from "../components/general/followMouse";
 import { HeroSection, ClientSection, CarouselSection, HowFireAiWorks, OurSolutionsSections, FAQsSection, MultilingualSection, PreFooterSection } from "../components/pages/home";
 import type { Component } from "solid-js";
 

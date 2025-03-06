@@ -7,6 +7,7 @@ import config from "./data/config";
 
 import "./index.css";
 import App from "./pages/Home";
+import Terms from "./pages/Terms";
 
 const root = document.getElementById("root");
 
@@ -23,6 +24,7 @@ render(
     <>
       <Router root={Layout}>
         <Route path="/" component={App} />
+        <Route path="/terms" component={Terms} />
       </Router>
     </>
   ),
