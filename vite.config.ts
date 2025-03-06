@@ -4,9 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [
-    solid({
-      ssr: true
-    }),
+    solid(),
     tailwindcss(),  
   ],
   server: {
@@ -14,8 +12,6 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
-    ssr: 'src/index.tsx',
-    ssrManifest: true,
   },
   resolve: {
     alias: {
@@ -24,8 +20,4 @@ export default defineConfig({
   },
   assetsInclude: ['**/*.svg'],
   base: '/',
-  ssr: {
-    noExternal: ['@microsoft/clarity'],
-    target: 'node'
-  }
 });
