@@ -5,7 +5,7 @@ import type { Component } from "solid-js";
 const App: Component = () => {
   return (
     <>
-      <FollowCursor />
+      {/* <FollowCursor /> */}
       <div class="lg:py-3 px-0 lg:px-18">
         <HeroSection />
         <ClientSection />

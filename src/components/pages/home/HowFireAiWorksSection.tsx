@@ -19,11 +19,6 @@ const HowFireAiWorksSection: Component = () => {
             How FireAI Works
           </h2>
         </div>
-        <div class="hidden lg:block">
-          <Button variant="primary" size="medium" onClick={() => window.open(links.demoLink, "_blank")}>
-            Get a demo
-          </Button>
-        </div>
       </div>
 
       {/* Desktop Grid */}
