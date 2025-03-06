@@ -2,6 +2,7 @@ import { Component, createSignal } from 'solid-js';
 import { CompanyLogo } from '../../assets/company';
 import Button from './buttons';
 import links from '../../data/links';
+import { A } from "@solidjs/router";
 
 const navLinks = [
     { name: "Our Solutions", href: "/#solutions" },
@@ -37,7 +38,7 @@ const Header: Component = () => {
                 {/* Desktop Navigation */}
                 <div class="hidden lg:flex items-center gap-8 h-full">
                     {navLinks.map(link => (
-                        <a 
+                        <A 
                             href={link.href} 
                             class="relative group flex items-center h-full"
                         >
@@ -48,7 +49,7 @@ const Header: Component = () => {
                                 {link.name}
                             </span>
                             <span class="absolute bottom-0 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-300 bg-gradient-to-r from-[#0600A3] to-[#0169FD]" />
-                        </a>
+                        </A>
                     ))}
                 </div>
 

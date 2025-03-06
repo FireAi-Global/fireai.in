@@ -2,7 +2,7 @@ import { Component } from "solid-js";
 import { CompanyLogo } from "../../assets/company/index";
 import { Facebook, Instagram, LinkedIn, Twitter } from "../../assets/icons";
 import links from "../../data/links";
-
+import { A } from "@solidjs/router";
 const socialLinks = [
   {
     name: "LinkedIn",
@@ -68,12 +68,12 @@ const Footer: Component = () => {
           {/* Center - Footer Links */}
           <div class="lg:w-1/2 flex flex-row justify-between lg:justify-end w-full gap-2 lg:gap-8 pb-8 lg:pb-0">
             {footerLinks.map((link) => (
-              <a
+              <A
                 href={link.href}
                 class="text-sm md:text-sm text-gray-600 hover:text-gray-900"
               >
                 {link.name}
-              </a>
+              </A>
             ))}
           </div>
       </div>

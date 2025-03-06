@@ -8,6 +8,7 @@ import config from "./data/config";
 import "./index.css";
 import App from "./pages/Home";
 import Terms from "./pages/Terms";
+import NotFound from "./pages/NotFound";
 
 const root = document.getElementById("root");
 
@@ -21,12 +22,11 @@ Clarity.init(config.clarity.id);
 
 render(
   () => (
-    <>
-      <Router root={Layout}>
-        <Route path="/" component={App} />
-        <Route path="/terms" component={Terms} />
-      </Router>
-    </>
+    <Router root={Layout}>
+      <Route path="/" component={App} />
+      <Route path="/terms" component={Terms} />
+      <Route path="*404" component={NotFound} />
+    </Router>
   ),
   root!,
 );
