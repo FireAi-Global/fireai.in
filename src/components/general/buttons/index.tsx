@@ -5,16 +5,13 @@ import { Motion } from "solid-motionone";
 interface ButtonProps {
   children: JSX.Element;
   variant?: "primary" | "secondary";
+  size?: "small" | "medium" | "large";
   onClick?: () => void;
 }
 
 const Button: Component<ButtonProps> = (props) => {
   const buttonClass = () => {
-    const baseClass = styles.button + "min-w-[160px] w-11/12 lg:w-3/12 rounded-[44px] text-[16px] cursor-pointer p-4 mx-auto lg:mx-0";
-    if (props.variant === "secondary") {
-      return `${baseClass} ${styles.secondary}`;
-    }
-    return `${baseClass} ${styles.primary}`;
+    return `${styles.button} ${props.variant === "secondary" ? styles.secondary : styles.primary} ${props.size === "small" ? styles.small : props.size === "medium" ? styles.medium : styles.large}`;
   };
 
   return (

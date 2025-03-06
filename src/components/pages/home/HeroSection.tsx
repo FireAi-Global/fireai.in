@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { HeroImage } from "../../../assets/landing";
+import { Hero } from "../../../assets/landing";
 import Button from "../../general/buttons";
 import { Motion } from "solid-motionone";
 
@@ -33,11 +33,11 @@ const HeroSection: Component = () => {
             variant="secondary"
             onClick={() => window.open("https://dashboard.fireai.in", "_blank")}
           >
-            Sign Up
+            Login
           </Button>
         </div>
         <div class="m-0">
-          <img src={HeroImage} alt="Hero Dashboard" />
+          <img src={Hero.HeroImage} alt="Hero Dashboard" />
         </div>
       </div>
     </Motion.div>

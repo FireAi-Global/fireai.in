@@ -1,5 +1,6 @@
 import { Component, createSignal } from 'solid-js';
 import { CompanyLogo } from '../../assets/company';
+import Button from './buttons';
 
 const navLinks = [
     { name: "Our Solutions", href: "#solutions" },
@@ -9,42 +10,59 @@ const navLinks = [
 ];
 
 const actionLinks = [
-    { name: "Login", href: "https://dashboard.fireai.in", class: "text-gray-900 hover:text-gray-600" },
-    { name: "Get a demo", href: "/demo", class: "bg-[#2B4EE7] text-white px-4 py-2 rounded-lg hover:bg-[#2342CC]" }
+    { 
+        name: "Login", 
+        href: "https://dashboard.fireai.in",
+        variant: "secondary"
+    },
+    { 
+        name: "Get a demo", 
+        href: "/demo", 
+        variant: "primary"
+    }
 ];
 
 const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = createSignal(false);
 
     return (
-        <header class="fixed top-2 lg:top-4 left-0 right-0 bg-white z-50 w-[85%] md:w-9/12 rounded-[34px] mx-auto h-[66px]">
-            <nav class="max-w-[1200px] mx-auto px-4 py-4 flex justify-between items-center">
+        <header class="fixed top-2 lg:top-6 left-0 right-0 bg-white z-50 w-[85%] md:w-9/12 rounded-[34px] mx-auto">
+            <nav class="h-[66px] max-w-[1200px] mx-auto px-6 flex justify-between items-center">
                 {/* Logo */}
-                <a href="/" class="flex items-center">
+                <a href="/" class="flex items-center h-full">
                     <img src={CompanyLogo} alt="FireAI Logo" class="h-7 lg:h-8" />
                 </a>
 
                 {/* Desktop Navigation */}
-                <div class="hidden lg:flex items-center gap-8">
+                <div class="hidden lg:flex items-center gap-8 h-full">
                     {navLinks.map(link => (
-                        <a href={link.href} class="text-gray-600 hover:text-gray-900">
-                            {link.name}
+                        <a 
+                            href={link.href} 
+                            class="relative group flex items-center h-full"
+                        >
+                            <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#0600A3] to-[#0169FD] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                {link.name}
+                            </span>
+                            <span class="absolute inset-0 text-gray-600 group-hover:opacity-0 transition-opacity duration-300 flex items-center">
+                                {link.name}
+                            </span>
+                            <span class="absolute bottom-0 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-300 bg-gradient-to-r from-[#0600A3] to-[#0169FD]" />
                         </a>
                     ))}
                 </div>
 
                 {/* Desktop Action Buttons */}
-                <div class="hidden lg:flex items-center gap-4">
+                <div class="hidden lg:flex items-center gap-4 h-full">
                     {actionLinks.map(link => (
-                        <a href={link.href} class={link.class}>
+                        <Button size="small" variant={link.variant as "secondary" | "primary"} onClick={() => window.open(link.href, "_blank")}>
                             {link.name}
-                        </a>
+                        </Button>
                     ))}
                 </div>
 
                 {/* Mobile Navigation */}
-                <div class="flex lg:hidden items-center gap-4">
-                    <a href="/demo" class="bg-[#2B4EE7] text-white px-4 py-1.5 rounded-[44px] lg:rounded-lg hover:bg-[#2342CC]">
+                <div class="flex lg:hidden items-center gap-4 h-full">
+                    <a href="/demo" class="flex items-center justify-center h-[38px] bg-[#2B4EE7] text-white px-4 rounded-[44px] hover:bg-[#2342CC]">
                         Get a demo
                     </a>
                     <button 
