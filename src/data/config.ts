@@ -1,6 +1,6 @@
 const config = {
   clarity: {
-    id: "k6aqxvxbxe",
+    id: "qk1easy5kk",
   },
 };
 
