@@ -10,11 +10,6 @@ const socialLinks = [
     icon: LinkedIn,
   },
   {
-    name: "Facebook",
-    href: links.socialLinks.facebook,
-    icon: Facebook,
-  },
-  {
     name: "Instagram",
     href: links.socialLinks.instagram,
     icon: Instagram,

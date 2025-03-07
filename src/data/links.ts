@@ -7,7 +7,6 @@ const links = {
   },
   socialLinks: {
     linkedin: "https://www.linkedin.com/company/fireaiglobal/",
-    facebook: "https://facebook.com/fireai",
     instagram: "https://www.instagram.com/fireaiglobal/",
     twitter: "https://x.com/FireAiglobal",
   },
