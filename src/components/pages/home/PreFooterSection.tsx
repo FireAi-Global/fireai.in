@@ -6,7 +6,7 @@ import links from '../../../data/links';
 
 const PreFooterSection: Component = () => {
     return (
-        <div class="lg:rounded-[32px] overflow-hidden"
+        <div class="lg:rounded-[32px] overflow-hidden text-center lg:text-left"
             style={{
                 "background-image": `url(${CompanyThemeGradient})`,
                 "background-size": 'cover',
@@ -17,7 +17,7 @@ const PreFooterSection: Component = () => {
             <div class="max-w-[1200px] mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 items-center">
                     {/* Left Content */}
-                    <div class="px-12 md:px-16 pt-10 lg:pb-10">
+                    <div class="px-10 lg:px-12 md:px-16 pt-10 lg:pb-10">
                         <h2 class="text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight mb-6">
                             Power your business
                             <br />
@@ -25,19 +25,31 @@ const PreFooterSection: Component = () => {
                         </h2>
                         <p class="text-[#DEDEDE] text-[18px] leading-[1.6] mb-8 max-w-[480px]">
                             Make real-time, data-backed decisions and stay ahead of the competition.
-                        </p>
-                        <Button
-                            variant="primary"
-                            size="large"
-                            onClick={() => window.open(links.demoLink, "_blank")}
-                        >
-                            Get a demo
-                        </Button>
+                        </p>]
+                        <div class="hidden lg:block">
+                            <Button
+                                variant="primary"
+                                size="large"
+                                onClick={() => window.open(links.demoLink, "_blank")}
+                            >
+                                Get a demo
+                            </Button>
+                        </div>
+                        <div class="block lg:hidden">
+                            <Button
+                                variant="primary"
+                                size="large"
+                                span='full'
+                                onClick={() => window.open(links.demoLink, "_blank")}
+                            >
+                                Get a demo
+                            </Button>
+                        </div>
                     </div>
 
                     {/* Right Image */}
                     <div class="relative h-full">
-                        <div class="absolute inset-0 bg-gradient-to-r from-[#070C47] to-transparent z-10 md:hidden" />
+                        <div class="absolute z-10 md:hidden" />
                         <img
                             src={PreFooter.PreFooterImage}
                             alt="FireAI Dashboard"

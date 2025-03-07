@@ -4,14 +4,14 @@ import { FireSmart } from "../../../assets/icons";
 
 const MultilingualSupportSection: Component = () => {
     return (
-        <div class="max-w-[1200px] mx-auto px-4 lg:py-12 pt-20" id="multilingual">
+        <div class="max-w-[1200px] lg:max-h-[450px] mx-auto my-10 px-4 lg:py-12 pt-20" id="multilingual">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 {/* Left side - Image */}
                 <div class="rounded-[20px] overflow-hidden order-2 lg:order-1">
                     <img
                         src={Multilingual.coverImage}
                         alt="Multilingual Support"
-                        class="w-full h-auto px-0 lg:px-20"
+                        class="w-auto h-full px-0 lg:px-10 object-fill"
                     />
                 </div>
 
@@ -24,13 +24,14 @@ const MultilingualSupportSection: Component = () => {
                     </div>
 
                     {/* Heading */}
-                    <h2 class="text-4xl lg:text-5xl font-medium">
-                        Connect Your Data Sources Easily Across All Platforms
+                    <h2 class="text-4xl lg:text-[32px] font-medium">
+                        Talk to FireAI in Any Language and get AI-powered insights within seconds
                     </h2>
 
                     {/* Description */}
                     <p class="text-gray-600 text-lg">
-                        Seamlessly integrate FireAI with your existing platforms—databases, Tally, spreadsheets, and cloud storage. No complex setups or technical expertise required.
+                        Now powered by Bhashini, FireAI lets you ask questions via voice in any language.
+                        No typing or language barriers! Just seamless conversations with your data.
                     </p>
 
                     {/* Features list */}
@@ -41,7 +42,7 @@ const MultilingualSupportSection: Component = () => {
                                     <span class="text-white text-sm">✓</span>
                                 </div>
                             </div>
-                            <p>Connect multiple sources for unified analysis.</p>
+                            <p>Speak in any language, FireAI will analyse and respond.</p>
                         </div>
 
                         <div class="flex items-start gap-3">
@@ -50,7 +51,7 @@ const MultilingualSupportSection: Component = () => {
                                     <span class="text-white text-sm">✓</span>
                                 </div>
                             </div>
-                            <p>Works with Excel, Google Sheets, SQL, and more.</p>
+                            <p>Voice-powered AI for real-time insights.</p>
                         </div>
 
                         <div class="flex items-start gap-3">
@@ -59,7 +60,7 @@ const MultilingualSupportSection: Component = () => {
                                     <span class="text-white text-sm">✓</span>
                                 </div>
                             </div>
-                            <p>100% secure, metadata-based integration ensures privacy.</p>
+                            <p>Break language barriers and make data-driven decisions effortlessly.</p>
                         </div>
                     </div>
                 </div>

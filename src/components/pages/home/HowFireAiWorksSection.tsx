@@ -1,14 +1,51 @@
-import { Component, createSignal } from "solid-js";
+import { Component, createSignal, onCleanup, onMount } from "solid-js";
 import { FireSmart } from "../../../assets/icons";
 import cards from "../../../data/home/howFireAiWorks";
-import { Overlay } from "../../../assets/landing/howFireAIWorks";
-import Button from "../../general/buttons";
-import links from "../../../data/links";
+
+const Card = ({ card }: { card: any }) => {
+  return (
+    <div class="text-center w-[280px] mx-auto relative overflow-hidden">
+      <img
+        src={card.image}
+        alt={card.description}
+        class="h-[380px] w-[280px] z-20"
+      />
+
+    </div>
+  );
+};
+
 const HowFireAiWorksSection: Component = () => {
   const [currentSlide, setCurrentSlide] = createSignal(0);
+  const [isPaused, setIsPaused] = createSignal(false);
+  const ROTATION_INTERVAL = 5000; // 5 seconds per slide
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % cards.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + cards.length) % cards.length);
+  };
+
+  // Auto rotation setup
+  onMount(() => {
+    const intervalId = setInterval(() => {
+      if (!isPaused()) {
+        setCurrentSlide((prev) => (prev + 1) % cards.length);
+      }
+    }, ROTATION_INTERVAL);
+
+    onCleanup(() => clearInterval(intervalId));
+  });
 
   return (
-    <div class="max-w-[1200px] mx-auto px-4 py-16" id="how-it-works">
+    <div
+      class="max-w-[1200px] mx-auto px-4 py-16"
+      id="how-it-works"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div class="flex justify-between items-start mb-10">
         <div class="w-full lg:w-fit text-center lg:text-left">
           <div class="inline-flex items-center gap-2 bg-[#F1F2FF] px-4 py-2 rounded-full mb-4 mx-auto">
@@ -24,60 +61,24 @@ const HowFireAiWorksSection: Component = () => {
       {/* Desktop Grid */}
       <div class="hidden lg:grid grid-cols-4 gap-8">
         {cards.map((card, index) => (
-          <div class="text-center w-[280px] rounded-[20px] relative overflow-hidden">
-            <div
-              class="absolute inset-0 z-[1]"
-              style={{
-                "background": `url(${card.background}) no-repeat center center`,
-                "background-size": "cover",
-              }}
-            />
-            <img
-              src={Overlay}
-              alt="Overlay"
-              class="absolute bottom-0 left-0 w-full h-[50%] z-20"
-            />
-            <div class="relative z-30 px-6">
-              <img
-                src={card.image}
-                alt={card.alt}
-                class="w-10/12 mx-auto h-[250px] object-contain"
-              />
-              <div class="text-center mt-[-20px]">
-                <h3 class="text-xl font-medium mb-3">
-                  {index + 1}. {card.title}
-                </h3>
-                <p class="text-[#494949] text-base">
-                  {card.description}
-                </p>
-              </div>
-            </div>
-          </div>
+          <Card card={card} />
         ))}
       </div>
 
       {/* Mobile Carousel */}
       <div class="lg:hidden">
-        <div class="bg-[#F8FAFC] rounded-[20px] p-6 mb-6">
+        <div class="text-center w-[280px] mx-auto rounded-[20px] relative overflow-hidden">
           <img
             src={cards[currentSlide()].image}
             alt={cards[currentSlide()].alt}
-            class="w-full h-auto"
+            class="w-full h-[380px] object-cover"
           />
-        </div>
-        <div class="text-center">
-          <h3 class="text-xl font-medium mb-3">
-            {currentSlide() + 1}. {cards[currentSlide()].title}
-          </h3>
-          <p class="text-[#64748B] text-base">
-            {cards[currentSlide()].description}
-          </p>
         </div>
 
         {/* Navigation Controls */}
         <div class="flex justify-center items-center gap-4 mt-8">
           <button
-            onClick={() => setCurrentSlide((prev) => (prev - 1 + cards.length) % cards.length)}
+            onClick={prevSlide}
             class="w-10 h-10 rounded-full border border-[#E5E7EB] flex items-center justify-center"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -89,14 +90,13 @@ const HowFireAiWorksSection: Component = () => {
             {cards.map((_, index) => (
               <div
                 onClick={() => setCurrentSlide(index)}
-                class={`h-2 rounded-full cursor-pointer transition-all duration-300 ${index === currentSlide() ? "w-8 bg-[#2B4EE7]" : "w-2 bg-[#E5E7EB]"
-                  }`}
+                class={`h-2 rounded-full cursor-pointer transition-all duration-300 ${index === currentSlide() ? "w-8 bg-[#2B4EE7]" : "w-2 bg-[#E5E7EB]"}`}
               />
             ))}
           </div>
 
           <button
-            onClick={() => setCurrentSlide((prev) => (prev + 1) % cards.length)}
+            onClick={nextSlide}
             class="w-10 h-10 rounded-full border border-[#E5E7EB] flex items-center justify-center"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">

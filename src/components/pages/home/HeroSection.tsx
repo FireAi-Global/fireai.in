@@ -21,28 +21,43 @@ const HeroSection: Component = () => {
         easing: "ease-in-out",
       }}
     >
-      <div class="mx-auto w-full md:w-8/12">
+      <div class="mx-auto">
+      <div class="w-full md:w-8/12 mx-auto">
         <h2 class="text-3xl md:text-4xl lg:text-5xl pt-30 font-medium">
-          From Data Overload to <span class="text-blue-400">AI-Powered</span>
-          <br />
-          Decisions In Seconds
+          AI-Powered Business <span class="bg-gradient-to-r from-[#322638] via-blue-400 to-[#322638] text-transparent bg-clip-text">Intelligence </span>
+          <br class="hidden lg:block" />
+          at Your Fingertips
         </h2>
-        <h3 class="text-sm md:text-base lg:text-lg mx-5 lg:mx-16">
+        <h3 class="text-sm md:text-base lg:text-lg mx-5 mt-2 lg:mt-8 lg:mx-16 lg:px-10 my-5 lg:my-0">
           Your business generates loads of data, but without the right tools, it
           just sits there. Slow decisions, wasted time and missed opportunities.
           FireAI fixes that.
         </h3>
-        <div class="flex flex-col lg:flex-row gap-4 justify-center mt-10">
-          <Button variant="primary">Get a demo</Button>
-          <Button
-            variant="secondary"
-            onClick={() => window.open("https://dashboard.fireai.in", "_blank")}
-          >
-            Login
-          </Button>
+        <div class="flex flex-col lg:flex-row gap-4 justify-center mt-2 lg:mt-10">
+          <div class="hidden lg:block">
+            <Button variant="primary">Get a demo</Button>
+          </div>
+          <div class="hidden lg:block">
+            <Button
+              variant="secondary"
+              onClick={() => window.open("https://dashboard.fireai.in", "_blank")}
+            >
+              Login
+            </Button>
+          </div>
+          <div class="lg:hidden">
+            <Button
+              variant="secondary"
+              span="full"
+              onClick={() => window.open("https://dashboard.fireai.in", "_blank")}
+            >
+              Login
+            </Button>
+          </div>
         </div>
-        <div class="m-0 px-10">
-          <img src={Hero.HeroImage} alt="Hero Dashboard" />
+        </div>
+        <div class="m-0 overflow-hidden">
+          <img src={Hero.HeroImage} alt="Hero Dashboard" class="lg:w-[80%] mx-auto w-[380px] min-h-[200px]" />
         </div>
       </div>
     </Motion.div>

@@ -48,7 +48,7 @@ const Header: Component = () => {
                             <span class="absolute inset-0 text-gray-600 group-hover:opacity-0 transition-opacity duration-300 flex items-center">
                                 {link.name}
                             </span>
-                            <span class="absolute bottom-0 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-300 bg-gradient-to-r from-[#0600A3] to-[#0169FD]" />
+                            <span class="absolute bottom-[22px] left-0 w-0 h-[2px] group-hover:w-full transition-all duration-300 bg-gradient-to-r from-[#0600A3] to-[#0169FD]" />
                         </A>
                     ))}
                 </div>
