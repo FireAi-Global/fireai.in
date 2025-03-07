@@ -23,10 +23,6 @@ const socialLinks = [
 
 const footerLinks = [
   {
-    name: "Support",
-    href: links.helperLinks.support,
-  },
-  {
     name: "Privacy Policy",
     href: links.helperLinks.privacy,
   },
