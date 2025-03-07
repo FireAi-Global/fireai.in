@@ -38,7 +38,7 @@ const MultilingualSupportSection: Component = () => {
                     <div class="space-y-4">
                         <div class="flex items-start gap-3">
                             <div class="mt-1 flex-shrink-0">
-                                <div class="w-5 h-5 rounded-full bg-[#2B4EE7] flex items-center justify-center">
+                                <div class="w-5 h-5 rounded-full bg-gradient-to-r from-[#0600A3] to-[#0169FD] flex items-center justify-center">
                                     <span class="text-white text-sm">✓</span>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@ const MultilingualSupportSection: Component = () => {
 
                         <div class="flex items-start gap-3">
                             <div class="mt-1 flex-shrink-0">
-                                <div class="w-5 h-5 rounded-full bg-[#2B4EE7] flex items-center justify-center">
+                                <div class="w-5 h-5 rounded-full bg-gradient-to-r from-[#0600A3] to-[#0169FD] flex items-center justify-center">
                                     <span class="text-white text-sm">✓</span>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@ const MultilingualSupportSection: Component = () => {
 
                         <div class="flex items-start gap-3">
                             <div class="mt-1 flex-shrink-0">
-                                <div class="w-5 h-5 rounded-full bg-[#2B4EE7] flex items-center justify-center">
+                                <div class="w-5 h-5 rounded-full bg-gradient-to-r from-[#0600A3] to-[#0169FD] flex items-center justify-center">
                                     <span class="text-white text-sm">✓</span>
                                 </div>
                             </div>

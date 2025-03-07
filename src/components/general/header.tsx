@@ -12,14 +12,14 @@ const navLinks = [
 ];
 
 const actionLinks = [
-    { 
-        name: "Login", 
+    {
+        name: "Login",
         href: links.applicationLinks.login,
         variant: "secondary"
     },
-    { 
-        name: "Get a demo", 
-        href: links.demoLink, 
+    {
+        name: "Get a demo",
+        href: links.demoLink,
         variant: "primary"
     }
 ];
@@ -28,18 +28,18 @@ const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = createSignal(false);
 
     return (
-        <header class="fixed top-2 lg:top-6 left-0 right-0 bg-white z-50 w-[85%] md:w-9/12 rounded-[12px] mx-auto border border-[#F4F4F4]">
+        <header class="fixed top-2 lg:top-6 left-0 right-0 bg-white z-50 w-[80%] lg:w-[870px] rounded-[12px] mx-auto border border-[#F4F4F4]">
             <nav class="h-[66px] max-w-[1200px] mx-auto px-6 flex justify-between items-center">
                 {/* Logo */}
                 <a href="/" class="flex items-center h-full">
-                    <img src={CompanyLogo} alt="FireAI Logo" class="h-7 lg:h-8" />
+                    <img src={CompanyLogo} alt="FireAI Logo" class="h-[37px] w-[137px]" />
                 </a>
 
                 {/* Desktop Navigation */}
-                <div class="hidden lg:flex items-center gap-8 h-full">
+                <div class="hidden lg:flex items-center gap-8 h-full text-[16px]">
                     {navLinks.map(link => (
-                        <A 
-                            href={link.href} 
+                        <A
+                            href={link.href}
                             class="relative group flex items-center h-full"
                         >
                             <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#0600A3] to-[#0169FD] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -67,7 +67,7 @@ const Header: Component = () => {
                     <Button variant="primary" size="small" onClick={() => window.open(links.demoLink, "_blank")}>
                         Get a demo
                     </Button>
-                    <button 
+                    <button
                         onClick={() => setIsMenuOpen(!isMenuOpen())}
                         class="text-gray-600 hover:text-gray-900"
                     >
