@@ -6,12 +6,25 @@ interface ButtonProps {
   children: JSX.Element;
   variant?: "primary" | "secondary";
   size?: "small" | "medium" | "large";
+  span?: "full" | "fit";
   onClick?: () => void;
 }
 
+const getButtonClasses = (variant: "primary" | "secondary", size: "small" | "medium" | "large", span: "full" | "fit") => {
+  const baseClasses = "rounded-[44px] lg:rounded-[8px]";
+  const variantClasses = variant === "secondary" ? styles.secondary : styles.primary;
+  const sizeClasses = {
+    small: styles.small,
+    medium: styles.medium,
+    large: styles.large
+  }[size];
+  const spanClasses = span === "full" ? "w-full" : "w-fit";
+  return `${styles.button} ${baseClasses} ${variantClasses} ${sizeClasses} ${spanClasses}`;
+};
+
 const Button: Component<ButtonProps> = (props) => {
   const buttonClass = () => {
-    return `${styles.button} ${props.variant === "secondary" ? styles.secondary : styles.primary} ${props.size === "small" ? styles.small : props.size === "medium" ? styles.medium : styles.large}`;
+    return getButtonClasses(props.variant || "primary", props.size || "medium", props.span || "fit");
   };
 
   return (

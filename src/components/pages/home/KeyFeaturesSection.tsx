@@ -53,7 +53,7 @@ const KeyFeaturesSection: Component = () => {
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-medium mb-1">
             Connect, Analyze, Automate - All in One Place.
           </h2>
-          <p class="text-[#DEDEDE] mb-8 max-w-2xl">
+          <p class="text-[#DEDEDE] mb-8 max-w-2xl mt-5">
             FireAI integrates with your business tools, turning scattered data
             into smart insights. Make faster decisions, optimize workflows and
             stay ahead with predictive analytics.
@@ -67,7 +67,10 @@ const KeyFeaturesSection: Component = () => {
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-20">
           {features.map((feature, index) => (
             <Motion.div
-              class={`w-full border rounded-[12px] bg-[#26263C26] backdrop-blur-[100px] p-6 ${index == 0 || index == 3 ? "lg:col-span-7" : "lg:col-span-5"} border-[#D2CECE4F]`}
+              class={`
+                w-full border rounded-[12px] bg-[#26263C26] backdrop-blur-[100px] 
+                ${index == 0 ? "pt-5" : "p-6"} 
+                ${index == 0 || index == 3 ? "lg:col-span-7" : "lg:col-span-5"} border-[#D2CECE4F]`}
               animate={{
                 opacity: [0, 1],
                 y: [10, 0],
@@ -77,10 +80,12 @@ const KeyFeaturesSection: Component = () => {
                 easing: "ease-in-out",
               }}
             >
-              <h3 class="text-3xl md:text-2xl font-medium mb-2">
-                {feature.title}
-              </h3>
-              <p class="text-[#FFFFFFB2] mb-6">{feature.description}</p>
+              <div class={`${index == 0 ? "px-6" : ""}`}>
+                <h3 class="text-3xl md:text-2xl font-medium mb-2">
+                  {feature.title}
+                </h3>
+                <p class="text-[#FFFFFFB2] mb-6">{feature.description}</p>
+              </div>
               <div class="rounded-lg">
                 <img src={feature.image} alt={feature.title} class="w-full" />
               </div>
@@ -111,25 +116,19 @@ const KeyFeaturesSection: Component = () => {
         {/* Desktop Grid */}
         <div class="hidden lg:grid grid-cols-12 gap-6">
           {benefits.map((benefit) => (
-            <div class="col-span-12 lg:col-span-3">
+            <div class="col-span-12 lg:col-span-3 max-h-[300px]">
               <div
                 class="rounded-[20px] p-6 h-[300px]"
                 style={{
                   background:
                     "linear-gradient(180deg, rgba(20, 20, 38, 0.7) 0%, rgba(20, 20, 38, 0.3) 100%)",
                   border: "1px solid rgba(130, 133, 206, 0.1)",
-                  "backdrop-filter": "blur(20px)", 
+                  "backdrop-filter": "blur(20px)",
                   "-webkit-backdrop-filter": "blur(20px)",
                 }}
               >
-                <div class="mb-4">
-                  <div
-                    class="flex items-center"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(20, 20, 38, 0.9) 0%, rgba(20, 20, 38, 0.4) 100%)",
-                    }}
-                  >
+                <div class="mb-4 h-[80px]">
+                  <div class="flex items-center">
                     <img
                       src={benefit.icon}
                       alt={benefit.title}
@@ -137,7 +136,7 @@ const KeyFeaturesSection: Component = () => {
                     />
                   </div>
                 </div>
-                <h3 class="text-[20px] font-medium mb-3 text-white">
+                <h3 class="text-[20px] font-medium text-white h-[50px] mb-5">
                   {benefit.title}
                 </h3>
                 <p class="text-[#A1A1A1] text-[15px] leading-[22px]">
@@ -149,9 +148,9 @@ const KeyFeaturesSection: Component = () => {
         </div>
 
         {/* Mobile Carousel */}
-        <div class="lg:hidden">
+        <div class="lg:hidden max-h-[280px]">
           <div
-            class="rounded-[20px] p-6"
+            class="rounded-[20px] px-6 min-h-[280px] max-h-[280px]"
             style={{
               background:
                 "linear-gradient(180deg, rgba(20, 20, 38, 0.7) 0%, rgba(20, 20, 38, 0.3) 100%)",
@@ -160,14 +159,8 @@ const KeyFeaturesSection: Component = () => {
               "-webkit-backdrop-filter": "blur(20px)",
             }}
           >
-            <div class="mb-4 h-[100px] lg:max-h-[150px]">
-              <div
-                class="flex items-center"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(20, 20, 38, 0.9) 0%, rgba(20, 20, 38, 0.4) 100%)",
-                }}
-              >
+            <div class="mb-4">
+              <div class="flex items-center h-[100px]">
                 <img
                   src={benefits[currentSlide()].icon}
                   alt={benefits[currentSlide()].title}
@@ -175,7 +168,7 @@ const KeyFeaturesSection: Component = () => {
                 />
               </div>
             </div>
-            <h3 class="text-[20px] font-medium mb-3 text-white">
+            <h3 class="text-[20px] font-medium mb-3 text-white h-[50px]">
               {benefits[currentSlide()].title}
             </h3>
             <p class="text-[#A1A1A1] text-[15px] leading-[22px]">
@@ -188,8 +181,8 @@ const KeyFeaturesSection: Component = () => {
             {benefits.map((_, index) => (
               <div
                 class={`h-2 rounded-full transition-all duration-300 cursor-pointer ${index === currentSlide()
-                    ? "w-8 bg-[#2B4EE7]"
-                    : "w-2 bg-[#A1A1A1]"
+                  ? "w-8 bg-[#2B4EE7]"
+                  : "w-2 bg-[#A1A1A1]"
                   }`}
                 onClick={() => handleDotClick(index)}
               />

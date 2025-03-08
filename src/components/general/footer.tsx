@@ -13,12 +13,7 @@ const socialLinks = [
     name: "Instagram",
     href: links.socialLinks.instagram,
     icon: Instagram,
-  },
-  {
-    name: "Twitter",
-    href: links.socialLinks.twitter,
-    icon: Twitter,
-  },
+  }
 ];
 
 const footerLinks = [
