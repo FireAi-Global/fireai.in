@@ -11,7 +11,7 @@ const MultilingualSupportSection: Component = () => {
                     <img
                         src={Multilingual.coverImage}
                         alt="Multilingual Support"
-                        class="w-auto h-full px-0 lg:px-10 object-fill"
+                        class="w-auto h-full max-h-[450px] px-0 lg:px-10 object-fill"
                     />
                 </div>
 
