@@ -11,6 +11,10 @@ module.exports = {
           '100%': { transform: 'translateX(-50%)' },
         },
       },
+      backdropBlur: {
+        md: '12px',
+      },
     },
   },
+  plugins: [],
 } 
