@@ -28,11 +28,11 @@ const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = createSignal(false);
 
     return (
-        <header class="fixed top-2 lg:top-6 left-0 right-0 bg-white z-50 w-[80%] lg:w-[870px] rounded-[12px] mx-auto border border-[#F4F4F4]">
-            <nav class="h-[66px] max-w-[1200px] mx-auto px-6 flex justify-between items-center">
+        <header class="fixed top-2 lg:top-6 left-0 right-0 z-50 w-[80%] lg:w-[870px] rounded-[12px] mx-auto">
+            <nav class="h-[66px] max-w-[1200px] mx-auto px-6 flex justify-between items-center backdrop-blur-md bg-white/80 rounded-[12px] border border-white/20">
                 {/* Logo */}
                 <a href="/" class="flex items-center h-full">
-                    <img src={CompanyLogo} alt="FireAI Logo" class="h-[37px] w-[137px]" />
+                    <img src={CompanyLogo} alt="FireAI Logo" class="h-[25px] lg:h-[37px] w-[90px] lg:w-[137px]" />
                 </a>
 
                 {/* Desktop Navigation */}

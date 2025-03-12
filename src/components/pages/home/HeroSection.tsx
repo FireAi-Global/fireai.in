@@ -33,7 +33,7 @@ const HeroSection: Component = () => {
           just sits there. Slow decisions, wasted time and missed opportunities.
           FireAI fixes that.
         </h3>
-        <div class="flex flex-col lg:flex-row gap-4 justify-center mt-2 lg:mt-10">
+        {/* <div class="flex flex-col lg:flex-row gap-4 justify-center mt-2 lg:mt-10">
           <div class="hidden lg:block">
             <Button variant="primary">Get a demo</Button>
           </div>
@@ -54,7 +54,7 @@ const HeroSection: Component = () => {
               Login
             </Button>
           </div>
-        </div>
+        </div> */}
         </div>
         <div class="m-0 overflow-hidden">
           <img src={Hero.HeroImage} alt="Hero Dashboard" class="lg:w-[80%] mx-auto w-[380px] min-h-[200px]" />

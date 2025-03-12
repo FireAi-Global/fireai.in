@@ -9,7 +9,7 @@ const links = {
     instagram: "https://www.instagram.com/fireaiglobal/",
   },
   helperLinks: {
-    privacy: "/",
+    privacy: "/privacy",
     terms: "/terms",
   },
 };
