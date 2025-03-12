@@ -9,7 +9,7 @@ import "./index.css";
 import App from "./pages/Home";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
-
+import Privacy from "./pages/Privacy";
 const root = document.getElementById("root");
 
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
@@ -25,6 +25,7 @@ render(
     <Router root={Layout}>
       <Route path="/" component={App} />
       <Route path="/terms" component={Terms} />
+      <Route path="/privacy" component={Privacy} />
       <Route path="*404" component={NotFound} />
     </Router>
   ),
