@@ -1,5 +1,5 @@
 /* @refresh reload */
-import { renderToString } from "solid-js/web";
+import { render } from "solid-js/web";
 import { Route, Router } from "@solidjs/router";
 import Layout from "./Layout";
 import Clarity from '@microsoft/clarity';
@@ -20,7 +20,7 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 Clarity.init(config.clarity.id);
 
-renderToString(
+render(
   () => (
     <Router root={Layout}>
       <Route path="/" component={App} />
