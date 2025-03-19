@@ -1,5 +1,5 @@
 /* @refresh reload */
-import { render } from "solid-js/web";
+import { renderToString } from "solid-js/web";
 import { Route, Router } from "@solidjs/router";
 import Layout from "./Layout";
 import Clarity from '@microsoft/clarity';
@@ -20,10 +20,12 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 Clarity.init(config.clarity.id);
 
-render(
+renderToString(
   () => (
     <Router root={Layout}>
       <Route path="/" component={App} />
+      {/* For google adsense */}
+      <Route path="/ga" component={App} />
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
       <Route path="*404" component={NotFound} />
