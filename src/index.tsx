@@ -24,6 +24,8 @@ render(
   () => (
     <Router root={Layout}>
       <Route path="/" component={App} />
+      {/* For google adsense */}
+      <Route path="/ga" component={App} />
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
       <Route path="*404" component={NotFound} />
