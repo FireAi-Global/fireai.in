@@ -138,7 +138,7 @@ export default function FireAIDemoModal(props: ModalProps) {
           onClick={handleClose}
         >
           <div
-            class="bg-white z-20 rounded-xl shadow-xl w-[550px] h-auto max-w-md p-[36px] relative"
+            class="bg-white z-20 rounded-xl shadow-xl h-auto w-[90%] max-w-md p-[36px] relative"
             onClick={(e) => e.stopPropagation()}
           >
             <h2 class="text-[26px] font-medium text-center leading-[40px] mb-3">
