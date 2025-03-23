@@ -23,10 +23,10 @@ export default function FireAIDemoModal(props: ModalProps) {
 
     const handleSubmit = async (e: Event) => {
         e.preventDefault();
-
+    
         let newErrors = { fullName: "", email: "", phone: "", recaptcha: "" };
         let isValid = true;
-
+    
         if (!fullName().trim()) {
             newErrors.fullName = "Full Name is required";
             isValid = false;
@@ -43,41 +43,45 @@ export default function FireAIDemoModal(props: ModalProps) {
             newErrors.recaptcha = "Please complete the reCAPTCHA";
             isValid = false;
         }
-
+        
         setErrors(newErrors);
-        if (!isValid) return; // Stop submission if errors exist
-
-        // Prepare form data
+        if (!isValid) return; 
+    
+        if (!recaptchaToken()) {
+            setErrors((prev) => ({ ...prev, recaptcha: "Please complete the reCAPTCHA" }));
+            return;
+        }
+    
         const formUrl =
             "https://docs.google.com/forms/d/e/1FAIpQLSe02s2IaZEegKigKtUqLR6g2-2zmgiQtUh7cE0iK9uLYcNh4Q/formResponse";
         const formData = new FormData();
         formData.append("entry.1033181941", email());
         formData.append("entry.2067890755", phone());
         formData.append("entry.664092787", fullName());
-
+    
         try {
             const response = await fetch(formUrl, {
                 method: "POST",
                 body: formData,
                 mode: "no-cors",
             });
-
-            // Since no-cors mode does not provide a response status, we assume success
+    
             console.log("Form submitted successfully");
-
-            // Reset the form after successful submission
+    
             setFullName("");
             setEmail("");
             setPhone("");
             setErrors({ fullName: "", email: "", phone: "", recaptcha: "" });
             props.onClose();
             setShowSuccessModal(true);
+            setRecaptchaToken("");
             setTimeout(() => {
                 setShowSuccessModal(false);
             }, 3000);
+        
         } catch (error) {
             console.error("Error submitting form:", error);
-
+    
             // Show an error message (if needed)
             setErrors((prevErrors) => ({
                 ...prevErrors,
@@ -95,7 +99,7 @@ export default function FireAIDemoModal(props: ModalProps) {
 
     createEffect(() => {
         if (props.isOpen) {
-            // Check if reCAPTCHA script already exists
+      
             if (!document.querySelector("#recaptcha-script")) {
                 const script = document.createElement("script");
                 script.id = "recaptcha-script";
@@ -110,7 +114,7 @@ export default function FireAIDemoModal(props: ModalProps) {
                     clearInterval(interval);
                     window.grecaptcha.render("recaptcha-container", {
                         sitekey: "6LddZ7kqAAAAAH9SA02xMRJoukBGkOVwjJE9mb8T",
-                        callback: (token) => setRecaptchaToken(token),
+                        callback: (token) => {console.log(token);setRecaptchaToken(token)},
                     });
                 }
             }, 500);
@@ -141,7 +145,7 @@ export default function FireAIDemoModal(props: ModalProps) {
                         </p>
 
                         <form class="space-y-5 mt-[28px]" onSubmit={handleSubmit}>
-                            {/* Full Name */}
+                    
                             <div>
                                 <label class="block text-[16px] font-medium mb-1">Full Name</label>
                                 <input
@@ -178,8 +182,6 @@ export default function FireAIDemoModal(props: ModalProps) {
                                 />
                                 {errors().email && <p class="text-red-500 text-sm mt-1">{errors().email}</p>}
                             </div>
-
-                            {/* Phone Number */}
                             <div>
                                 <label class="block text-[16px] font-medium mb-1">Phone Number</label>
                                 <input
@@ -198,12 +200,11 @@ export default function FireAIDemoModal(props: ModalProps) {
                                 {errors().phone && <p class="text-red-500 text-sm mt-1">{errors().phone}</p>}
                             </div>
 
-                            <div id="recaptcha-container" class="g-recaptcha mb-1"
+                            <div id="recaptcha-container" class="g-recaptcha mb-0"
                                 data-sitekey="6LddZ7kqAAAAAH9SA02xMRJoukBGkOVwjJE9mb8T"
                                 data-callback="recaptchaCallback"></div>
                             {errors().recaptcha && <p class="text-red-500 text-sm mt-0">{errors().recaptcha}</p>}
 
-                            {/* Submit Button */}
                             <button
                                 type="submit"
                                 class="w-full flex justify-center cursor-pointer items-center text-center align-middle mt-[36px] h-[42px] bg-gradient-to-r from-blue-800 via-blue-700 to-blue-500 text-white py-3 rounded-lg text-lg font-medium hover:opacity-90 transition"
@@ -212,7 +213,6 @@ export default function FireAIDemoModal(props: ModalProps) {
                             </button>
                         </form>
 
-                        {/* Close Button */}
                         <button
                             onClick={props.onClose}
                             class="absolute top-2 right-4 font-light cursor-pointer text-gray-500 hover:text-gray-700 text-sm"
