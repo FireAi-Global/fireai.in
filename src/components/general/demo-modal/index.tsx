@@ -89,6 +89,14 @@ export default function FireAIDemoModal(props: ModalProps) {
             }));
         }
     };
+    const handleClose = () =>{
+        setFullName("");
+        setEmail("");
+        setPhone("");
+        setRecaptchaToken("")
+        setErrors({ fullName: "", email: "", phone: "", recaptcha: "" });
+        props.onClose();
+    }
 
     onMount(() => {
         (window as any).recaptchaCallback = (token: string) => {
@@ -126,7 +134,7 @@ export default function FireAIDemoModal(props: ModalProps) {
             <Show when={props.isOpen}>
                 <div
                     class="fixed inset-0 flex items-center justify-center bg-transparent backdrop-blur-md"
-                    onClick={props.onClose}
+                    onClick={handleClose}
                 >
                     <div
                         class="bg-white z-20 rounded-xl shadow-xl w-[550px] h-auto max-w-md p-[36px] relative"
@@ -214,7 +222,7 @@ export default function FireAIDemoModal(props: ModalProps) {
                         </form>
 
                         <button
-                            onClick={props.onClose}
+                            onClick={handleClose}
                             class="absolute top-2 right-4 font-light cursor-pointer text-gray-500 hover:text-gray-700 text-sm"
                         >
                             ✖
