@@ -114,7 +114,7 @@ export default function FireAIDemoModal(props: ModalProps) {
                     clearInterval(interval);
                     window.grecaptcha.render("recaptcha-container", {
                         sitekey: "6LddZ7kqAAAAAH9SA02xMRJoukBGkOVwjJE9mb8T",
-                        callback: (token) => {console.log(token);setRecaptchaToken(token)},
+                        callback: (token) => {setRecaptchaToken(token);  setErrors((prev) => ({ ...prev, recaptcha: "" }));},
                     });
                 }
             }, 500);
