@@ -67,7 +67,7 @@ const Header: Component = () => {
                             <Button
                                 size="small"
                                 variant={link.variant as "secondary" | "primary"}
-                                onClick={() => setIsDemoModalOpen(true)} // Replace this with modal logic
+                                onClick={() => {setIsDemoModalOpen(true)}} // Replace this with modal logic
                             >
                                 {link.name}
                             </Button>
@@ -86,13 +86,13 @@ const Header: Component = () => {
                 {/* Mobile Navigation */}
                 <div class="flex lg:hidden items-center gap-4 h-full">
                     <Button variant="primary" size="small"
-                        onClick={() => setIsDemoModalOpen(true)}
+                        onClick={() =>{setIsMenuOpen(false);  setIsDemoModalOpen(true)}}
                     //  onClick={() => window.open(links.demoLink, "_blank")}
                     >
                         Get a demo
                     </Button>
                     <button
-                        onClick={() => setIsMenuOpen(true)}
+                        onClick={() => setIsMenuOpen(!isMenuOpen())}
                         class="text-gray-600 hover:text-gray-900"
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
