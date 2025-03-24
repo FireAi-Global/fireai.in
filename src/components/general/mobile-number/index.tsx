@@ -302,7 +302,7 @@ export default function MobileNumberInput(props: MobileNumberInputProps) {
 
     return (
         <div>
-            <div class="flex space-x-2 items-center">
+            <div class="flex space-x-2 items-center w-full">
                 <select
                     class={`p-2 w-35 border rounded-md focus:outline-none h-[42px] mt-[4px] ${
                         props.error ? "border-red-500" : "border-gray-300"
@@ -320,7 +320,7 @@ export default function MobileNumberInput(props: MobileNumberInputProps) {
                 <input
                     type="number"
                     class={`
-                        flex-1 p-2 border rounded-md focus:outline-none h-[42px] mt-[4px]
+                        flex-1 p-2 w-35 border rounded-md focus:outline-none h-[42px] mt-[4px]
                         ${props.error ? "border-red-500" : "border-gray-300"}
                     `}
                     placeholder="Phone number"
