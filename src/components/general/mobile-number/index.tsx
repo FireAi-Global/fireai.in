@@ -312,7 +312,7 @@ export default function MobileNumberInput(props: MobileNumberInputProps) {
                 >
                     {countriesWithFlags.map((country) => (
                         <option value={country.dial_code}>
-                            {country.flag} {country.name} ({country.dial_code})
+                            {country.flag} {country.dial_code}
                         </option>
                     ))}
                 </select>
