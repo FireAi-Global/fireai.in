@@ -3,6 +3,7 @@ import { CompanyLogo } from '../../assets/company';
 import Button from './buttons';
 import links from '../../data/links';
 import { A } from "@solidjs/router";
+import FireAIDemoModal from './demo-modal';
 
 const navLinks = [
     { name: "Our Solutions", href: "/#solutions" },
@@ -15,17 +16,23 @@ const actionLinks = [
     {
         name: "Login",
         href: links.applicationLinks.login,
-        variant: "secondary"
+        variant: "secondary",
+        type: 'link'
     },
     {
         name: "Get a demo",
         href: links.demoLink,
-        variant: "primary"
+        variant: "primary",
+        type: 'button',
+
     }
 ];
 
+
+
 const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = createSignal(false);
+    const [isDemoModalOpen, setIsDemoModalOpen] = createSignal(false);
 
     return (
         <header class="fixed top-2 lg:top-6 left-0 right-0 z-50 w-[80%] lg:w-[870px] rounded-[12px] mx-auto">
@@ -55,16 +62,33 @@ const Header: Component = () => {
 
                 {/* Desktop Action Buttons */}
                 <div class="hidden lg:flex items-center gap-4 h-full">
-                    {actionLinks.map(link => (
-                        <Button size="small" variant={link.variant as "secondary" | "primary"} onClick={() => window.open(link.href, "_blank")}>
-                            {link.name}
-                        </Button>
-                    ))}
+                    {actionLinks.map((link) =>
+                        link.type !== "link" ? (
+                            <Button
+                                size="small"
+                                variant={link.variant as "secondary" | "primary"}
+                                onClick={() => {setIsDemoModalOpen(true)}} // Replace this with modal logic
+                            >
+                                {link.name}
+                            </Button>
+                        ) : (
+                            <Button
+                                size="small"
+                                variant={link.variant as "secondary" | "primary"}
+                                onClick={() => window.open(link.href, "_blank")}
+                            >
+                                {link.name}
+                            </Button>
+                        )
+                    )}
                 </div>
 
                 {/* Mobile Navigation */}
                 <div class="flex lg:hidden items-center gap-4 h-full">
-                    <Button variant="primary" size="small" onClick={() => window.open(links.demoLink, "_blank")}>
+                    <Button variant="primary" size="small"
+                        onClick={() =>{setIsMenuOpen(false);  setIsDemoModalOpen(true)}}
+                    //  onClick={() => window.open(links.demoLink, "_blank")}
+                    >
                         Get a demo
                     </Button>
                     <button
@@ -77,7 +101,7 @@ const Header: Component = () => {
                     </button>
                 </div>
             </nav>
-
+            <FireAIDemoModal isOpen={isDemoModalOpen()} onClose={() => setIsDemoModalOpen(false)} />
             {/* Mobile Menu */}
             {isMenuOpen() && (
                 <div class="lg:hidden absolute top-full left-0 right-0 bg-white mt-2 p-4 rounded-lg">

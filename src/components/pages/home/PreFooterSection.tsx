@@ -1,10 +1,13 @@
-import { Component } from 'solid-js';
+import { Component, createSignal } from 'solid-js';
 import { PreFooter } from "../../../assets/landing"
 import { CompanyThemeGradient } from '../../../assets/company';
 import Button from '../../general/buttons';
 import links from '../../../data/links';
+import FireAIDemoModal from '../../general/demo-modal';
 
 const PreFooterSection: Component = () => {
+       const [isDemoModalOpen, setIsDemoModalOpen] = createSignal(false);
+    
     return (
         <div class="lg:rounded-[32px] overflow-hidden text-center lg:text-left"
             style={{
@@ -14,6 +17,11 @@ const PreFooterSection: Component = () => {
                 "background-repeat": 'no-repeat'
             }}
         >
+            <div class='absolute z-50'>
+
+        <FireAIDemoModal isOpen={isDemoModalOpen()} onClose={() => setIsDemoModalOpen(false)} />
+            </div>
+
             <div class="max-w-[1200px] mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 items-center">
                     {/* Left Content */}
@@ -25,12 +33,12 @@ const PreFooterSection: Component = () => {
                         </h2>
                         <p class="text-[#DEDEDE] text-[18px] leading-[1.6] mb-8 max-w-[480px]">
                             Make real-time, data-backed decisions and stay ahead of the competition.
-                        </p>]
+                        </p>
                         <div class="hidden lg:block">
                             <Button
                                 variant="primary"
                                 size="large"
-                                onClick={() => window.open(links.demoLink, "_blank")}
+                                onClick={() => setIsDemoModalOpen(true)}
                             >
                                 Get a demo
                             </Button>
@@ -40,13 +48,13 @@ const PreFooterSection: Component = () => {
                                 variant="primary"
                                 size="large"
                                 span='full'
-                                onClick={() => window.open(links.demoLink, "_blank")}
+                                onClick={() => setIsDemoModalOpen(true)}
                             >
                                 Get a demo
                             </Button>
                         </div>
                     </div>
-
+    
                     {/* Right Image */}
                     <div class="relative h-full">
                         <div class="absolute z-10 md:hidden" />
