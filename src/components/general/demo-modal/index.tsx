@@ -143,7 +143,7 @@ export default function FireAIDemoModal(props: ModalProps) {
       isValid = false;
     }
     if (!validatePhone(phone())) {
-      newErrors.phone = `Enter a valid phone number for ${phone()}`;
+      newErrors.phone = `Enter a valid phone number`;
       isValid = false;
     }
     if (!recaptchaToken()) {
