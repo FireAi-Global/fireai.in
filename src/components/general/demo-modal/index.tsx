@@ -220,7 +220,7 @@ export default function FireAIDemoModal(props: ModalProps) {
             >
               <h2 class="text-[26px] font-medium text-center leading-[40px] mb-3">
                 Book a Free{" "}
-                <span class="bg-gradient-to-r from-[#0600A3] via-[#0169FD] to-[#000] text-transparent bg-clip-text">
+                <span class="text-[#322638] bg-gradient-to-r from-[#0600A3] via-[#0169FD] to-[#000] text-transparent bg-clip-text">
                 FireAI{" "}
               </span>
                 De
