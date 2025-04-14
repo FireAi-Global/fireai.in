@@ -34,11 +34,11 @@ const infoData = [
     href: "mailto:info@fireai.in",
     icon: Mail,
   },
-  {
-    name: "+91 8828869898",
-    href: "https://wa.me/918828869898",
-    icon: WhatsApp,
-  },
+  // {
+  //   name: "+91 8828869898",
+  //   href: "https://wa.me/918828869898",
+  //   icon: WhatsApp,
+  // },
   {
     name: "Level 1, First International Financial Centre, Plot No. C-54 & C-55, G Block Bandra Kurla Complex, Mumbai 400051",
     icon: Location,
