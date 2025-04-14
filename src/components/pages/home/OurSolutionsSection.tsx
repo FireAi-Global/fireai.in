@@ -43,7 +43,7 @@ const CarouselSection = () => {
             <span class="text-gray-700">Our Solutions</span>
           </div>
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight">
-            Simplifying <span class="bg-gradient-to-r from-[#0600A3] via-[#322638] to-[#0169FD] text-transparent bg-clip-text">Complex Data</span>{" "}
+            Simplifying <span class="text-[#322638] bg-gradient-to-r from-[#0600A3] via-[#322638] to-[#0169FD] text-transparent bg-clip-text">Complex Data</span>{" "}
             <br class="hidden md:block" />
             for Smarter and Faster Decisions
           </h2>

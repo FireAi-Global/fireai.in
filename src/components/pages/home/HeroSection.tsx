@@ -24,7 +24,7 @@ const HeroSection: Component = () => {
       <div class="mx-auto">
       <div class="w-full md:w-8/12 mx-auto">
         <h2 class="text-3xl md:text-4xl lg:text-5xl pt-30 font-medium">
-          AI-Powered Business <span class="bg-gradient-to-r from-[#322638] via-blue-400 to-[#322638] text-transparent bg-clip-text">Intelligence </span>
+          AI-Powered Business <span class="text-[#322638] bg-gradient-to-r from-[#322638] via-blue-400 to-[#322638] text-transparent bg-clip-text">Intelligence </span>
           <br class="hidden lg:block" />
           at Your Fingertips
         </h2>
