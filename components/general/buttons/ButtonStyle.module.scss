@@ -1,0 +1,102 @@
+.button {
+    min-width: 162px;
+    height: 48px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    align-self: center;
+}
+
+.small {
+    min-width: 120px;
+    height: 42px;
+}
+
+.medium {
+    min-width: 162px;
+    height: 48px;
+}
+
+.large {
+    min-width: 200px;
+    height: 56px;
+}
+
+
+
+.primary {
+    background: linear-gradient(90deg, #0915A0 0%, #0169FD 100%);
+    color: white;
+    border: none;
+
+    &:hover {
+        background: linear-gradient(180deg, #0915A0 0%, #0169FD 100%);
+        transition: all 0.2s ease-in-out;
+    }
+}
+
+.secondary {
+    background: transparent;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1px;
+        background: linear-gradient(to right, #8285CE, #A5A8CC);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+        border-radius: inherit;
+    }
+
+    &:hover {
+        &::before {
+            border: 1px solid #E7E7E7;
+        }
+    }
+
+    @keyframes gradientMove {
+        0% {
+            background-position: 100% 0;
+        }
+        100% {
+            background-position: -100% 0;
+        }
+    }
+}
+
+.gradient-border {
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1px;
+    background: linear-gradient(to right, #8285CE, #A5A8CC);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
