@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/general/header";
 import Footer from "@/components/general/footer";
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
   description: "FireAI is the AI brain for businesses. It helps businesses to make better decisions and grow faster powered by AI.",
   authors: [{ name: "FireAI" }],
   robots: "index, follow",
-  themeColor: "#000000",
   openGraph: {
     type: "website",
     url: "https://fireai.in/",
@@ -44,6 +43,14 @@ export const metadata: Metadata = {
   icons: {
     icon: "/assets/favicon.ico",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1, 
+  userScalable: false,
 };
 
 export default function RootLayout({

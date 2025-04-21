@@ -2,6 +2,13 @@
 
 import { useState, useEffect } from 'react';
 
+// Add type definition for window.grecaptcha
+declare global {
+  interface Window {
+    grecaptcha?: any;
+  }
+}
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -19,6 +26,40 @@ interface FormErrors {
   email: string;
   phone: string;
   recaptcha: string;
+}
+
+// Error Modal Component
+function ErrorModal({ onClose, errorMessage }: { onClose: () => void; errorMessage: string }) {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-transparent backdrop-blur-md">
+      <div className="bg-white rounded-xl shadow-xl w-[281px] h-auto p-[28px] text-center align-middle">
+        <div className="text-red-500 text-6xl items-center flex justify-center flex-col">
+          <svg
+            width="55"
+            height="55"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-7v2h2v-2h-2zm0-8v6h2V7h-2z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <h2 className="text-xl font-medium mt-4">Oops! Something went wrong</h2>
+        <p className="text-gray-500 font-normal text-[16px] mt-2">
+          {errorMessage}
+        </p>
+        <button
+          onClick={onClose}
+          className="w-full flex justify-center cursor-pointer items-center text-center align-middle mt-[36px] h-[42px] bg-gradient-to-r from-red-800 via-red-700 to-red-500 text-white py-3 rounded-lg text-lg font-medium hover:opacity-90 transition"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
 }
 
 // Success Modal Component
@@ -77,6 +118,8 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
     recaptchaToken: ''
   });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({
     fullName: '',
@@ -121,41 +164,65 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
     setErrors(newErrors);
     if (!isValid) return;
 
-    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSe02s2IaZEegKigKtUqLR6g2-2zmgiQtUh7cE0iK9uLYcNh4Q/formResponse';
-    const googleFormData = new FormData();
-    googleFormData.append('entry.1033181941', formData.email);
-    googleFormData.append('entry.2067890755', formData.phone);
-    googleFormData.append('entry.664092787', formData.fullName);
-
     try {
       setLoading(true);
-      await fetch(formUrl, {
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        body: googleFormData,
-        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone
+        })
       });
 
-      // Reset form and show success modal
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '+91',
-        recaptchaToken: ''
-      });
-      setErrors({
-        fullName: '',
-        email: '',
-        phone: '',
-        recaptcha: ''
-      });
-      onClose();
-      setShowSuccessModal(true);
+      const result = await response.json();
+      
+      if (!response.ok) {
+        // Handle specific error cases
+        if (response.status === 400 && result.errors) {
+          setErrors({
+            fullName: result.errors.name || '',
+            email: result.errors.email || '',
+            phone: result.errors.phone || '',
+            recaptcha: ''
+          });
+          setLoading(false);
+          return;
+        }
+        
+        // Show error modal for server errors
+        setErrorMessage(result.message || 'Something went wrong. Please try again.');
+        setShowErrorModal(true);
+        setLoading(false);
+        return;
+      }
+
+      if (result.success) {
+        // Reset form and show success modal
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '+91',
+          recaptchaToken: ''
+        });
+        setErrors({
+          fullName: '',
+          email: '',
+          phone: '',
+          recaptcha: ''
+        });
+        setShowSuccessModal(true);
+      } else {
+        setErrorMessage(result.message || 'Failed to submit form');
+        setShowErrorModal(true);
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setErrors(prev => ({
-        ...prev,
-        form: 'Submission failed. Please try again later.'
-      }));
+      setErrorMessage('Unable to connect to the server. Please try again later.');
+      setShowErrorModal(true);
     } finally {
       setLoading(false);
     }
@@ -178,170 +245,206 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
     setErrors(prev => ({ ...prev, recaptcha: '' }));
   };
 
-  // Close handler
-  const handleClose = () => {
+  // Handle error modal close
+  const handleErrorModalClose = () => {
+    setShowErrorModal(false);
+    setErrorMessage('');
     onClose();
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '+91',
-      recaptchaToken: ''
-    });
-    setErrors({
-      fullName: '',
-      email: '',
-      phone: '',
-      recaptcha: ''
-    });
+  };
+
+  // Handle success modal close
+  const handleSuccessModalClose = () => {
+    setShowSuccessModal(false);
+    onClose();
+  };
+
+  // Handle main modal close
+  const handleMainModalClose = () => {
+    if (!showErrorModal && !showSuccessModal) {
+      onClose();
+    }
   };
 
   // Initialize reCAPTCHA
   useEffect(() => {
     if (isOpen) {
-      const script = document.createElement('script');
-      script.src = 'https://www.google.com/recaptcha/api.js';
-      script.async = true;
-      script.defer = true;
-      document.body.appendChild(script);
+      const loadRecaptcha = () => {
+        try {
+          const script = document.createElement('script');
+          script.src = `https://www.google.com/recaptcha/api.js`;
+          script.async = true;
+          script.defer = true;
+          document.body.appendChild(script);
 
-      const interval = setInterval(() => {
-        if (window.grecaptcha) {
-          clearInterval(interval);
-          window.grecaptcha.render('recaptcha-container', {
-            sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
-            callback: (token: string) => {
-              if (token) {
-                handleRecaptchaChange(token);
-              }
-            },
-          });
-        }
-      }, 500);
-
-      return () => {
-        clearInterval(interval);
-        const existingScript = document.querySelector('script[src="https://www.google.com/recaptcha/api.js"]');
-        if (existingScript) {
-          document.body.removeChild(existingScript);
+          return script;
+        } catch (error) {
+          console.error('Error loading reCAPTCHA script:', error);
+          return null;
         }
       };
+
+      const initializeRecaptcha = () => {
+        try {
+          if (window.grecaptcha && window.grecaptcha.render) {
+            window.grecaptcha.render('recaptcha-container', {
+              sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
+              callback: (token: string) => {
+                if (token) {
+                  handleRecaptchaChange(token);
+                }
+              },
+            });
+          }
+        } catch (error) {
+          console.error('Error initializing reCAPTCHA:', error);
+        }
+      };
+
+      const script = loadRecaptcha();
+      if (script) {
+        script.onload = () => {
+          const interval = setInterval(() => {
+            if (window.grecaptcha) {
+              clearInterval(interval);
+              initializeRecaptcha();
+            }
+          }, 100);
+
+          // Clear interval after 10 seconds to prevent infinite checking
+          setTimeout(() => clearInterval(interval), 10000);
+        };
+
+        return () => {
+          clearTimeout(script.onload as any);
+          if (script.parentNode) {
+            script.parentNode.removeChild(script);
+          }
+          // Clean up any existing reCAPTCHA elements
+          const existingRecaptcha = document.querySelector('.grecaptcha-badge');
+          if (existingRecaptcha && existingRecaptcha.parentNode) {
+            existingRecaptcha.parentNode.removeChild(existingRecaptcha);
+          }
+        };
+      }
     }
   }, [isOpen]);
 
   if (!isOpen && !showSuccessModal) return null;
+  if(!isOpen && showErrorModal) return null;
 
   return (
     <>
-      {isOpen && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-transparent backdrop-blur-md z-50"
-          onClick={handleClose}
-        >
-          <div
-            className="bg-white z-20 rounded-xl shadow-xl h-auto w-[90%] lg:overflow-none overflow-auto max-w-md p-[36px] relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 className="text-[26px] font-medium text-center leading-[40px] mb-3">
-              Book a Free{' '}
-              <span className="bg-gradient-to-r from-[#0600A3] via-[#0169FD] to-[#000] text-transparent bg-clip-text">
-                FireAI{' '}
-              </span>
-              De
-              <span className="bg-gradient-to-r from-[#0600A3] via-[#0600A3] to-[#000] text-transparent bg-clip-text">
-                m
-              </span>
-              o Call
-            </h2>
-            <p className="text-gray-500 font-normal text-center text-[16px] leading-[24px] mb-6">
-              Transform your business growth with AI-driven insights. Get real-time
-              alerts & risk analysis.
-            </p>
+      {(isOpen || showErrorModal || showSuccessModal) && (
+        <div className="fixed inset-0 flex items-center justify-center bg-transparent backdrop-blur-md z-50"
+             onClick={handleMainModalClose}>
+          {isOpen && !showErrorModal && !showSuccessModal && (
+            <div
+              className="bg-white z-20 rounded-xl shadow-xl h-auto w-[90%] lg:overflow-none overflow-auto max-w-md p-[36px] relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-[26px] font-medium text-center leading-[40px] mb-3">
+                Book a Free{' '}
+                <span className="bg-gradient-to-r from-[#0600A3] via-[#0169FD] to-[#000] text-transparent bg-clip-text">
+                  FireAI{' '}
+                </span>
+                De
+                <span className="bg-gradient-to-r from-[#0600A3] via-[#0600A3] to-[#000] text-transparent bg-clip-text">
+                  m
+                </span>
+                o Call
+              </h2>
+              <p className="text-gray-500 font-normal text-center text-[16px] leading-[24px] mb-6">
+                Transform your business growth with AI-driven insights. Get real-time
+                alerts & risk analysis.
+              </p>
 
-            <form className="space-y-5 mt-[28px]" onSubmit={handleSubmit}>
-              <div>
-                <label className="block text-[16px] font-medium mb-1">Full Name</label>
-                <input
-                  type="text"
-                  name="fullName"
-                  placeholder="Your full name"
-                  className={`w-full p-3 border h-[42px] mt-[4px] rounded-md focus:outline-none focus:ring-1 ${
-                    errors.fullName ? 'border-red-500' : 'border-gray-300 focus:ring-[#8B87F4]'
-                  }`}
-                  value={formData.fullName}
-                  onChange={handleInputChange}
-                />
-                {errors.fullName && (
-                  <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
-                )}
-              </div>
+              <form className="space-y-5 mt-[28px]" onSubmit={handleSubmit}>
+                <div>
+                  <label className="block text-[16px] font-medium mb-1">Full Name</label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    placeholder="Your full name"
+                    className={`w-full p-3 border h-[42px] mt-[4px] rounded-md focus:outline-none focus:ring-1 ${
+                      errors.fullName ? 'border-red-500' : 'border-gray-300 focus:ring-[#8B87F4]'
+                    }`}
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                  />
+                  {errors.fullName && (
+                    <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
+                  )}
+                </div>
 
-              <div>
-                <label className="block text-[16px] font-medium mb-1">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="you@gmail.com"
-                  className={`w-full p-3 border h-[42px] mt-[4px] rounded-md focus:outline-none focus:ring-1 ${
-                    errors.email ? 'border-red-500' : 'border-gray-300 focus:ring-[#8B87F4]'
-                  }`}
-                  value={formData.email}
-                  onChange={handleInputChange}
-                />
-                {errors.email && (
-                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-                )}
-              </div>
+                <div>
+                  <label className="block text-[16px] font-medium mb-1">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="you@gmail.com"
+                    className={`w-full p-3 border h-[42px] mt-[4px] rounded-md focus:outline-none focus:ring-1 ${
+                      errors.email ? 'border-red-500' : 'border-gray-300 focus:ring-[#8B87F4]'
+                    }`}
+                    value={formData.email}
+                    onChange={handleInputChange}
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
+                </div>
 
-              <div>
-                <label className="block text-[16px] font-medium mb-1">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="+911234567890"
-                  className={`w-full p-3 border h-[42px] mt-[4px] rounded-md focus:outline-none focus:ring-1 ${
-                    errors.phone ? 'border-red-500' : 'border-gray-300 focus:ring-[#8B87F4]'
-                  }`}
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                />
-                {errors.phone && (
-                  <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-                )}
-              </div>
+                <div>
+                  <label className="block text-[16px] font-medium mb-1">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="+911234567890"
+                    className={`w-full p-3 border h-[42px] mt-[4px] rounded-md focus:outline-none focus:ring-1 ${
+                      errors.phone ? 'border-red-500' : 'border-gray-300 focus:ring-[#8B87F4]'
+                    }`}
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                  />
+                  {errors.phone && (
+                    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                  )}
+                </div>
 
-              <div>
-                <div id="recaptcha-container" className="flex justify-center items-center mb-0 w-full"></div>
-                {errors.recaptcha && (
-                  <p className="text-red-500 text-sm mt-0">{errors.recaptcha}</p>
-                )}
-              </div>
+                <div>
+                  <div id="recaptcha-container" className="flex justify-center items-center mb-0 w-full"></div>
+                  {errors.recaptcha && (
+                    <p className="text-red-500 text-sm mt-0">{errors.recaptcha}</p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className={`w-full flex justify-center cursor-pointer 
+                      items-center text-center align-middle mt-[36px] h-[42px] ${
+                        loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-800 via-blue-700 to-blue-500'
+                      } text-white py-3 rounded-lg text-lg font-medium hover:opacity-90 transition`}
+                >
+                  {loading ? 'Submitting...' : 'Submit'}
+                </button>
+              </form>
 
               <button
-                type="submit"
-                disabled={loading}
-                className={`w-full flex justify-center cursor-pointer 
-                    items-center text-center align-middle mt-[36px] h-[42px] ${
-                      loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-800 via-blue-700 to-blue-500'
-                    } text-white py-3 rounded-lg text-lg font-medium hover:opacity-90 transition`}
+                onClick={handleMainModalClose}
+                className="absolute top-2 right-4 font-light cursor-pointer text-gray-500 hover:text-gray-700 text-sm"
               >
-                {loading ? 'Submitting...' : 'Submit'}
+                ✖
               </button>
-            </form>
-
-            <button
-              onClick={handleClose}
-              className="absolute top-2 right-4 font-light cursor-pointer text-gray-500 hover:text-gray-700 text-sm"
-            >
-              ✖
-            </button>
-          </div>
+            </div>
+          )}
+          {showSuccessModal && <SuccessModal onClose={handleSuccessModalClose} />}
+          {showErrorModal && <ErrorModal onClose={handleErrorModalClose} errorMessage={errorMessage} />}
         </div>
       )}
-      {showSuccessModal && <SuccessModal onClose={() => setShowSuccessModal(false)} />}
     </>
   );
 }
