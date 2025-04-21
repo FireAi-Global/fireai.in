@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FireSmartWhite } from "@/public/assets/icons";
@@ -9,20 +9,26 @@ import { benefits, features } from "@/data/home/keyFeatures";
 
 export default function KeyFeaturesSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  let timer: NodeJS.Timeout;
+  const timerRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
-    timer = setInterval(() => {
+    timerRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % benefits.length);
     }, 3000);
 
-    return () => clearInterval(timer);
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
   }, []);
 
   const handleDotClick = (index: number) => {
     setCurrentSlide(index);
-    clearInterval(timer);
-    timer = setInterval(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+    timerRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % benefits.length);
     }, 3000);
   };

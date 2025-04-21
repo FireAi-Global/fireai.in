@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { FireSmart } from "@/public/assets/icons";
 import cards from "@/data/home/howFireAiWorks";
 
-const Card = ({ card }: { card: any }) => {
+const Card = ({ card }: { card: { image: StaticImageData; description: string; title: string; alt: string } }) => {
   return (
     <div className="text-center w-[280px] mx-auto relative overflow-hidden">
       <Image

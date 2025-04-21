@@ -7,7 +7,11 @@ import 'react-phone-input-2/lib/style.css';
 // Add type definition for window.grecaptcha
 declare global {
   interface Window {
-    grecaptcha?: any;
+    grecaptcha?: {
+      ready: (callback: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+      render: (container: string | HTMLElement, options: { sitekey: string; size: string }) => number;
+    };
   }
 }
 
@@ -213,7 +217,7 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    let newErrors: FormErrors = {
+    const newErrors: FormErrors = {
       fullName: '',
       email: '',
       phone: '',

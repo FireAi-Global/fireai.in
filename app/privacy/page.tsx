@@ -22,7 +22,7 @@ const Privacy = () => {
 
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">2. About This Policy</h2>
-        <p className="mb-4">This Privacy Policy applies to Fire AI's services, including its website and any related tools. It outlines:</p>
+        <p className="mb-4">This Privacy Policy applies to Fire AI&apos;s services, including its website and any related tools. It outlines:</p>
         <ul className="list-disc ml-6 space-y-2">
           <li>What personal data we collect.</li>
           <li>How we use your data.</li>
