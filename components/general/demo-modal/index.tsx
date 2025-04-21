@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 // Add type definition for window.grecaptcha
 declare global {
@@ -132,6 +134,81 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const validatePhone = (phone: string) => /^\+\d{1,4}\d{7,14}$/.test(phone);
 
+  // Initialize reCAPTCHA
+  useEffect(() => {
+    if (isOpen) {
+      const loadRecaptcha = () => {
+        try {
+          const script = document.createElement('script');
+          script.src = `https://www.google.com/recaptcha/api.js?render=explicit`;
+          script.async = true;
+          script.defer = true;
+          document.body.appendChild(script);
+
+          return script;
+        } catch (error) {
+          console.error('Error loading reCAPTCHA script:', error);
+          return null;
+        }
+      };
+
+      const initializeRecaptcha = () => {
+        try {
+          if (window.grecaptcha && window.grecaptcha.render) {
+            window.grecaptcha.render('recaptcha-container', {
+              sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
+              callback: (token: string) => {
+                setFormData(prev => ({ ...prev, recaptchaToken: token }));
+                setErrors(prev => ({ ...prev, recaptcha: '' }));
+              },
+              'expired-callback': () => {
+                setFormData(prev => ({ ...prev, recaptchaToken: '' }));
+                setErrors(prev => ({ ...prev, recaptcha: 'reCAPTCHA has expired, please verify again' }));
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Error initializing reCAPTCHA:', error);
+        }
+      };
+
+      const script = loadRecaptcha();
+      if (script) {
+        script.onload = () => {
+          const interval = setInterval(() => {
+            if (window.grecaptcha) {
+              clearInterval(interval);
+              initializeRecaptcha();
+            }
+          }, 100);
+
+          // Clear interval after 10 seconds to prevent infinite checking
+          setTimeout(() => clearInterval(interval), 10000);
+        };
+      }
+
+      // Reset form data when modal opens
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '+91',
+        recaptchaToken: ''
+      });
+
+      return () => {
+        // Clean up reCAPTCHA
+        const existingScript = document.querySelector('script[src*="recaptcha"]');
+        if (existingScript && existingScript.parentNode) {
+          existingScript.parentNode.removeChild(existingScript);
+        }
+        const existingRecaptcha = document.querySelector('.grecaptcha-badge');
+        if (existingRecaptcha && existingRecaptcha.parentNode) {
+          existingRecaptcha.parentNode.removeChild(existingRecaptcha);
+        }
+      };
+    }
+  }, [isOpen]);
+
   // Form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,6 +221,7 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
     };
     let isValid = true;
 
+    // Validate required fields
     if (!formData.fullName.trim()) {
       newErrors.fullName = 'Full Name is required';
       isValid = false;
@@ -156,13 +234,17 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
       newErrors.phone = 'Enter a valid phone number (e.g., +911234567890)';
       isValid = false;
     }
+
+    // Explicitly check for reCAPTCHA
     if (!formData.recaptchaToken) {
-      newErrors.recaptcha = 'Please complete the reCAPTCHA';
+      newErrors.recaptcha = 'Please complete the reCAPTCHA verification';
       isValid = false;
     }
 
     setErrors(newErrors);
-    if (!isValid) return;
+    if (!isValid) {
+      return;
+    }
 
     try {
       setLoading(true);
@@ -239,12 +321,6 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
     }
   };
 
-  // reCAPTCHA callback
-  const handleRecaptchaChange = (token: string) => {
-    setFormData(prev => ({ ...prev, recaptchaToken: token }));
-    setErrors(prev => ({ ...prev, recaptcha: '' }));
-  };
-
   // Handle error modal close
   const handleErrorModalClose = () => {
     setShowErrorModal(false);
@@ -264,70 +340,6 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
       onClose();
     }
   };
-
-  // Initialize reCAPTCHA
-  useEffect(() => {
-    if (isOpen) {
-      const loadRecaptcha = () => {
-        try {
-          const script = document.createElement('script');
-          script.src = `https://www.google.com/recaptcha/api.js`;
-          script.async = true;
-          script.defer = true;
-          document.body.appendChild(script);
-
-          return script;
-        } catch (error) {
-          console.error('Error loading reCAPTCHA script:', error);
-          return null;
-        }
-      };
-
-      const initializeRecaptcha = () => {
-        try {
-          if (window.grecaptcha && window.grecaptcha.render) {
-            window.grecaptcha.render('recaptcha-container', {
-              sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
-              callback: (token: string) => {
-                if (token) {
-                  handleRecaptchaChange(token);
-                }
-              },
-            });
-          }
-        } catch (error) {
-          console.error('Error initializing reCAPTCHA:', error);
-        }
-      };
-
-      const script = loadRecaptcha();
-      if (script) {
-        script.onload = () => {
-          const interval = setInterval(() => {
-            if (window.grecaptcha) {
-              clearInterval(interval);
-              initializeRecaptcha();
-            }
-          }, 100);
-
-          // Clear interval after 10 seconds to prevent infinite checking
-          setTimeout(() => clearInterval(interval), 10000);
-        };
-
-        return () => {
-          clearTimeout(script.onload as any);
-          if (script.parentNode) {
-            script.parentNode.removeChild(script);
-          }
-          // Clean up any existing reCAPTCHA elements
-          const existingRecaptcha = document.querySelector('.grecaptcha-badge');
-          if (existingRecaptcha && existingRecaptcha.parentNode) {
-            existingRecaptcha.parentNode.removeChild(existingRecaptcha);
-          }
-        };
-      }
-    }
-  }, [isOpen]);
 
   if (!isOpen && !showSuccessModal) return null;
   if(!isOpen && showErrorModal) return null;
@@ -399,15 +411,29 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
                   <label className="block text-[16px] font-medium mb-1">
                     Phone Number
                   </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="+911234567890"
-                    className={`w-full p-3 border h-[42px] mt-[4px] rounded-md focus:outline-none focus:ring-1 ${
-                      errors.phone ? 'border-red-500' : 'border-gray-300 focus:ring-[#8B87F4]'
-                    }`}
+                  <PhoneInput
+                    country={'in'}
                     value={formData.phone}
-                    onChange={handleInputChange}
+                    onChange={(phone) => setFormData(prev => ({ ...prev, phone: '+' + phone }))}
+                    containerClass="!w-full"
+                    inputClass="!w-full !p-3 !pl-[40px] !h-[42px] !rounded-md !text-base !border-gray-300"
+                    buttonClass="!h-[42px] !rounded-l-md !border-gray-300 !bg-transparent !border-r-0"
+                    buttonStyle={{
+                      background: 'white',
+                      border: '1px solid #d1d5db',
+                      borderRight: 'none'
+                    }}
+                    inputStyle={{
+                      background: 'white',
+                      width: '100%',
+                      height: '42px',
+                      fontSize: '16px',
+                      borderRadius: '6px',
+                      border: '1px solid #d1d5db'
+                    }}
+                    dropdownStyle={{
+                      width: '300px'
+                    }}
                   />
                   {errors.phone && (
                     <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
@@ -415,9 +441,9 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
                 </div>
 
                 <div>
-                  <div id="recaptcha-container" className="flex justify-center items-center mb-0 w-full"></div>
+                  <div id="recaptcha-container" className="flex justify-center items-center mb-2 w-full"></div>
                   {errors.recaptcha && (
-                    <p className="text-red-500 text-sm mt-0">{errors.recaptcha}</p>
+                    <p className="text-red-500 text-sm text-center">{errors.recaptcha}</p>
                   )}
                 </div>
 
