@@ -9,13 +9,6 @@ interface ContactFormData {
   name: string;
   email: string;
   phone: string;
-  recaptchaToken: string;
-}
-
-interface FormDataWithoutToken {
-  name: string;
-  email: string;
-  phone: string;
 }
 
 interface ApiResponse {
@@ -23,7 +16,7 @@ interface ApiResponse {
   message: string;
   error?: string;
   errors?: Record<string, string>;
-  data?: Omit<ContactFormData, 'recaptchaToken'>;
+  data?: ContactFormData;
 }
 
 // Constants
@@ -112,7 +105,7 @@ const createEmailTemplate = (name: string): string => {
   `;
 };
 
-const validateFormData = (data: FormDataWithoutToken): Record<string, string> => {
+const validateFormData = (data: ContactFormData): Record<string, string> => {
   const errors: Record<string, string> = {};
 
   if (!data.name) {
@@ -136,7 +129,7 @@ const validateFormData = (data: FormDataWithoutToken): Record<string, string> =>
   return errors;
 };
 
-const sendAcknowledgmentEmail = async (data: FormDataWithoutToken) => {
+const sendAcknowledgmentEmail = async (data: ContactFormData) => {
   try {
     await emailConfig.transporter.sendMail({
       from: {
@@ -158,60 +151,12 @@ const sendAcknowledgmentEmail = async (data: FormDataWithoutToken) => {
   }
 };
 
-const verifyRecaptcha = async (token: string): Promise<boolean> => {
-  try {
-    const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
-    if (!recaptchaSecret) {
-      throw new Error('reCAPTCHA configuration error');
-    }
-
-    const params = new URLSearchParams({
-      secret: recaptchaSecret,
-      response: token
-    });
-
-    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString(),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.success;
-  } catch (error) {
-    console.error('reCAPTCHA verification error:', error);
-    return false;
-  }
-};
-
 // Main API Handler
 export async function POST(request: Request): Promise<NextResponse<ApiResponse>> {
   try {
     // Parse and validate request body
     const body: ContactFormData = await request.json();
-    const { name, email, phone, recaptchaToken } = body;
-
-    if (!recaptchaToken) {
-      return NextResponse.json({
-        success: false,
-        message: 'reCAPTCHA verification is required',
-        error: 'recaptcha_failed'
-      }, { status: 400 });
-    }
-
-    // Verify reCAPTCHA
-    const isRecaptchaValid = await verifyRecaptcha(recaptchaToken);
-    if (!isRecaptchaValid) {
-      return NextResponse.json({
-        success: false,
-        message: 'Security check failed. Please try again.',
-        error: 'recaptcha_failed'
-      }, { status: 400 });
-    }
+    const { name, email, phone } = body;
 
     // Validate form data
     const validationErrors = validateFormData({ name, email, phone });
