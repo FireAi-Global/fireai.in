@@ -12,9 +12,9 @@ export default function Home() {
     <div className="lg:py-3 px-0 lg:px-18">
       <HeroSection />
       <ClientSection />
-      <KeyFeaturesSection />
-      <HowFireAiWorksSection />
       <OurSolutionsSection />
+      <HowFireAiWorksSection />
+      <KeyFeaturesSection />
       <MultilingualSupportSection />
       <FAQsSection />
       <PreFooterSection />

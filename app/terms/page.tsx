@@ -6,11 +6,11 @@ const Terms = () => {
       <h1 className="text-3xl font-bold mb-8 pt-10">Terms of Use</h1>
       
       <p className="mb-6">
-        Welcome to FIRE AI, an AI-powered data science notebook platform. The domain name <a href="https://www.fireai.in" className="text-blue-600 hover:underline">https://www.fireai.in</a>, an internet based platform, is owned and operated by Steeplogic Systems Private Limited (hereinafter referred to as "Fire AI" or "We" or "Our" or "Us" or "Company"). The term "User" or "You" or "Your" refers to any individual or entity accessing or using the platform.
+        Welcome to FIRE AI, an AI-powered data science notebook platform. The domain name <a href="https://www.fireai.in" className="text-blue-600 hover:underline">https://www.fireai.in</a>, an internet based platform, is owned and operated by Steeplogic Systems Private Limited (hereinafter referred to as &quot;Fire AI&quot; or &quot;We&quot; or &quot;Our&quot; or &quot;Us&quot; or &quot;Company&quot;). The term &quot;User&quot; or &quot;You&quot; or &quot;Your&quot; refers to any individual or entity accessing or using the platform.
       </p>
 
       <p className="mb-6">
-        These Terms of Use ("Terms") govern your access to and use of the Company's platform, website, services, and content (collectively, the "Services") provided by the Company. Please read these terms and conditions carefully before using our Services. By accessing or using this internet based platform, you agree to be bound by the terms described herein and all terms incorporated by reference. If you do not agree to all of these terms, do not use this internet based platform.
+        These Terms of Use (&quot;Terms&quot;) govern your access to and use of the Company&apos;s platform, website, services, and content (collectively, the &quot;Services&quot;) provided by the Company. Please read these terms and conditions carefully before using our Services. By accessing or using this internet based platform, you agree to be bound by the terms described herein and all terms incorporated by reference. If you do not agree to all of these terms, do not use this internet based platform.
       </p>
 
       <section className="mb-8">
@@ -22,7 +22,7 @@ const Terms = () => {
           </p>
 
           <p>
-            <span className="font-medium">1.2.</span> Before using or accessing the Services, you may be required to register an account as per the website instructions and provide accurate, truthful, complete, and up-to-date information. You are responsible for maintaining the confidentiality of your account and are liable for any activities that occur under your account. The Company shall have sole and complete control over the Company's Services, data and format.
+            <span className="font-medium">1.2.</span> Before using or accessing the Services, you may be required to register an account as per the website instructions and provide accurate, truthful, complete, and up-to-date information. You are responsible for maintaining the confidentiality of your account and are liable for any activities that occur under your account. The Company shall have sole and complete control over the Company&apos;s Services, data and format.
           </p>
 
           <p>
@@ -83,7 +83,7 @@ const Terms = () => {
         <h2 className="text-2xl font-semibold mb-4">6. Data Privacy and Security</h2>
         <div className="space-y-4">
           <p>
-            <span className="font-medium">6.1.</span> Your privacy is of utmost importance to the Company, and we are dedicated to safeguarding it. We will maintain appropriate technical and organizational measures for the protection of the security, confidentiality and integrity of Services and User's personal information in compliance to the applicable law, including but not limited to Information Technology Act, 2000, read with the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 and/or any other data protection laws in force at the point of time.
+            <span className="font-medium">6.1.</span> Your privacy is of utmost importance to the Company, and we are dedicated to safeguarding it. We will maintain appropriate technical and organizational measures for the protection of the security, confidentiality and integrity of Services and User&apos;s personal information in compliance to the applicable law, including but not limited to Information Technology Act, 2000, read with the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 and/or any other data protection laws in force at the point of time.
           </p>
 
           <p>
@@ -113,7 +113,7 @@ const Terms = () => {
         <h2 className="text-2xl font-semibold mb-4">8. Disclaimer of Warranties</h2>
         <div className="space-y-4">
           <p>
-            <span className="font-medium">8.1.</span> Our Services are provided "as is" and "as available" without any warranties of any kind, either express or implied. The Company expressly disclaims any and all warranties, including but not limited to, any implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
+            <span className="font-medium">8.1.</span> Our Services are provided &quot;as is&quot; and &quot;as available&quot; without any warranties of any kind, either express or implied. The Company expressly disclaims any and all warranties, including but not limited to, any implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
           </p>
 
           <p>
@@ -133,11 +133,11 @@ const Terms = () => {
         <h2 className="text-2xl font-semibold mb-4">10. Indemnification</h2>
         <div className="space-y-4">
           <p>
-            <span className="font-medium">10.1.</span> You agree to indemnify and hold the Company (and its directors, officers, affiliates, and agents) harmless from, and against, any and all loss, liability, and expense (including reasonable attorneys' fees and costs) suffered or incurred by reason of any claims, proceedings, or suits based on or arising out of (i) any breach by you of this contract, (ii) your use of the Services, and (iii) your infringement of any intellectual property or other rights of any third party.
+            <span className="font-medium">10.1.</span> You agree to indemnify and hold the Company (and its directors, officers, affiliates, and agents) harmless from, and against, any and all loss, liability, and expense (including reasonable attorneys&apos; fees and costs) suffered or incurred by reason of any claims, proceedings, or suits based on or arising out of (i) any breach by you of this contract, (ii) your use of the Services, and (iii) your infringement of any intellectual property or other rights of any third party.
           </p>
 
           <p>
-            <span className="font-medium">10.2.</span> You will be solely responsible for defending any such claim using mutually-agreed counsel, subject to the Company's right to participate with counsel it selects, and you will not agree to any settlement that imposes any obligation or liability on the Company (or its directors, officers, affiliates, and agents) without the Company's prior written consent.
+            <span className="font-medium">10.2.</span> You will be solely responsible for defending any such claim using mutually-agreed counsel, subject to the Company&apos;s right to participate with counsel it selects, and you will not agree to any settlement that imposes any obligation or liability on the Company (or its directors, officers, affiliates, and agents) without the Company&apos;s prior written consent.
           </p>
         </div>
       </section>
@@ -177,7 +177,7 @@ const Terms = () => {
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">13. Updates</h2>
         <p className="mb-4">
-          The Company's platform may, at its discretion, periodically check for, download, and install updates without prior notice to the User. The User may obtain updates exclusively from the Company or its authorized sources. The Company reserves the right to modify or update the User's system as necessary to facilitate the implementation of such updates. By using the platform, the User expressly consents to receiving automatic updates without any further notification. The Company makes no representations or warranties that updates will include or support all existing software features, services, or peripheral devices.
+          The Company&apos;s platform may, at its discretion, periodically check for, download, and install updates without prior notice to the User. The User may obtain updates exclusively from the Company or its authorized sources. The Company reserves the right to modify or update the User&apos;s system as necessary to facilitate the implementation of such updates. By using the platform, the User expressly consents to receiving automatic updates without any further notification. The Company makes no representations or warranties that updates will include or support all existing software features, services, or peripheral devices.
         </p>
       </section>
 
@@ -212,7 +212,7 @@ const Terms = () => {
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">18. Waiver</h2>
         <p className="mb-4">
-          No waiver of any term in these Terms shall be deemed a further or continuing waiver of such term or any other term, and the Company's failure to assert any right or provision under these Terms shall not constitute a waiver of such right or provision.
+          No waiver of any term in these Terms shall be deemed a further or continuing waiver of such term or any other term, and the Company&apos;s failure to assert any right or provision under these Terms shall not constitute a waiver of such right or provision.
         </p>
       </section>
 
