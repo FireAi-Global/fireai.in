@@ -124,7 +124,7 @@ export async function POST(request: Request): Promise<NextResponse<ApiResponse>>
       console.error('Error making API request:', error);
       return NextResponse.json({
         success: false,
-        message: 'Our servers are experiencing issues. Please try again later.',
+        message: 'Our servers are experiencing issues. Please try again later or contact us at info@fireai.in ',
         error: error instanceof Error ? error.message : 'server_error'
       }, { status: 500 });
     }
