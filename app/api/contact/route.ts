@@ -90,6 +90,10 @@ export async function POST(request: Request): Promise<NextResponse<ApiResponse>>
     };
 
     try {
+
+      console.log(`API URL: ${apiUrl}`);
+      console.log(`Request Body: ${JSON.stringify(requestBody)}`);
+
       // Prepare the API request
       const apiResponse = await fetch(apiUrl, {
         method: 'POST',
@@ -111,6 +115,8 @@ export async function POST(request: Request): Promise<NextResponse<ApiResponse>>
       }
 
       const apiResult = await apiResponse.json();
+      console.log(`Mail request successfully submitted for ${email}`);
+      console.log(`API Response: ${JSON.stringify(apiResult)}`);
 
       // Return success response
       return NextResponse.json({
