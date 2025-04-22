@@ -111,6 +111,7 @@ export async function POST(request: Request): Promise<NextResponse<ApiResponse>>
       }
 
       const apiResult = await apiResponse.json();
+      console.log(`Mail request successfully submitted for ${email}`);
 
       // Return success response
       return NextResponse.json({
