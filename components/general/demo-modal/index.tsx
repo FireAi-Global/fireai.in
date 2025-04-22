@@ -141,9 +141,20 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
   // Initialize reCAPTCHA
   useEffect(() => {
     if (isOpen) {
+      let script: HTMLScriptElement | null = null;
+      let checkInterval: NodeJS.Timeout | null = null;
+      let timeoutId: NodeJS.Timeout | null = null;
+
       const loadRecaptcha = () => {
         try {
-          const script = document.createElement('script');
+          // Check if script is already loaded
+          const existingScript = document.querySelector('script[src*="recaptcha"]');
+          if (existingScript) {
+            script = existingScript as HTMLScriptElement;
+            return script;
+          }
+
+          script = document.createElement('script');
           script.src = `https://www.google.com/recaptcha/api.js?render=explicit`;
           script.async = true;
           script.defer = true;
@@ -159,6 +170,12 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
       const initializeRecaptcha = () => {
         try {
           if (window.grecaptcha && window.grecaptcha.render) {
+            // Check if reCAPTCHA is already rendered
+            const existingRecaptcha = document.querySelector('#recaptcha-container .grecaptcha-badge');
+            if (existingRecaptcha) {
+              return;
+            }
+
             window.grecaptcha.render('recaptcha-container', {
               sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
               callback: (token: string) => {
@@ -176,18 +193,28 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
         }
       };
 
-      const script = loadRecaptcha();
+      const checkRecaptchaLoaded = () => {
+        if (window.grecaptcha) {
+          if (checkInterval) {
+            clearInterval(checkInterval);
+            checkInterval = null;
+          }
+          initializeRecaptcha();
+        }
+      };
+
+      script = loadRecaptcha();
       if (script) {
         script.onload = () => {
-          const interval = setInterval(() => {
-            if (window.grecaptcha) {
-              clearInterval(interval);
-              initializeRecaptcha();
+          checkInterval = setInterval(checkRecaptchaLoaded, 100);
+          
+          // Clear interval after 30 seconds to prevent infinite checking
+          timeoutId = setTimeout(() => {
+            if (checkInterval) {
+              clearInterval(checkInterval);
+              checkInterval = null;
             }
-          }, 100);
-
-          // Clear interval after 10 seconds to prevent infinite checking
-          setTimeout(() => clearInterval(interval), 10000);
+          }, 30000);
         };
       }
 
@@ -200,14 +227,23 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
       });
 
       return () => {
-        // Clean up reCAPTCHA
-        const existingScript = document.querySelector('script[src*="recaptcha"]');
-        if (existingScript && existingScript.parentNode) {
-          existingScript.parentNode.removeChild(existingScript);
+        // Clean up intervals and timeouts
+        if (checkInterval) {
+          clearInterval(checkInterval);
         }
-        const existingRecaptcha = document.querySelector('.grecaptcha-badge');
-        if (existingRecaptcha && existingRecaptcha.parentNode) {
-          existingRecaptcha.parentNode.removeChild(existingRecaptcha);
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+
+        // Only remove the script if the modal is being closed
+        if (!isOpen) {
+          if (script && script.parentNode) {
+            script.parentNode.removeChild(script);
+          }
+          const existingRecaptcha = document.querySelector('.grecaptcha-badge');
+          if (existingRecaptcha && existingRecaptcha.parentNode) {
+            existingRecaptcha.parentNode.removeChild(existingRecaptcha);
+          }
         }
       };
     }
