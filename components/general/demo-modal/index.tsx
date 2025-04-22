@@ -4,17 +4,6 @@ import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
-// Add type definition for window.grecaptcha
-declare global {
-  interface Window {
-    grecaptcha?: {
-      ready: (callback: () => void) => void;
-      execute: (siteKey: string, options: { action: string }) => Promise<string>;
-      render: (container: string | HTMLElement, options: { sitekey: string; size: string }) => number;
-    };
-  }
-}
-
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -24,14 +13,12 @@ interface FormData {
   fullName: string;
   email: string;
   phone: string;
-  recaptchaToken: string;
 }
 
 interface FormErrors {
   fullName: string;
   email: string;
   phone: string;
-  recaptcha: string;
 }
 
 // Error Modal Component
@@ -120,8 +107,7 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
-    phone: '+91',
-    recaptchaToken: ''
+    phone: '+91'
   });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -130,122 +116,21 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
   const [errors, setErrors] = useState<FormErrors>({
     fullName: '',
     email: '',
-    phone: '',
-    recaptcha: ''
+    phone: ''
   });
 
   // Validation functions
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const validatePhone = (phone: string) => /^\+\d{1,4}\d{7,14}$/.test(phone);
 
-  // Initialize reCAPTCHA
+  // Reset form data when modal opens
   useEffect(() => {
     if (isOpen) {
-      let script: HTMLScriptElement | null = null;
-      let checkInterval: NodeJS.Timeout | null = null;
-      let timeoutId: NodeJS.Timeout | null = null;
-
-      const loadRecaptcha = () => {
-        try {
-          // Check if script is already loaded
-          const existingScript = document.querySelector('script[src*="recaptcha"]');
-          if (existingScript) {
-            script = existingScript as HTMLScriptElement;
-            return script;
-          }
-
-          script = document.createElement('script');
-          script.src = `https://www.google.com/recaptcha/api.js?render=explicit`;
-          script.async = true;
-          script.defer = true;
-          document.body.appendChild(script);
-
-          return script;
-        } catch (error) {
-          console.error('Error loading reCAPTCHA script:', error);
-          return null;
-        }
-      };
-
-      const initializeRecaptcha = () => {
-        try {
-          if (window.grecaptcha && window.grecaptcha.render) {
-            // Check if reCAPTCHA is already rendered
-            const existingRecaptcha = document.querySelector('#recaptcha-container .grecaptcha-badge');
-            if (existingRecaptcha) {
-              return;
-            }
-
-            window.grecaptcha.render('recaptcha-container', {
-              sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
-              callback: (token: string) => {
-                setFormData(prev => ({ ...prev, recaptchaToken: token }));
-                setErrors(prev => ({ ...prev, recaptcha: '' }));
-              },
-              'expired-callback': () => {
-                setFormData(prev => ({ ...prev, recaptchaToken: '' }));
-                setErrors(prev => ({ ...prev, recaptcha: 'reCAPTCHA has expired, please verify again' }));
-              }
-            });
-          }
-        } catch (error) {
-          console.error('Error initializing reCAPTCHA:', error);
-        }
-      };
-
-      const checkRecaptchaLoaded = () => {
-        if (window.grecaptcha) {
-          if (checkInterval) {
-            clearInterval(checkInterval);
-            checkInterval = null;
-          }
-          initializeRecaptcha();
-        }
-      };
-
-      script = loadRecaptcha();
-      if (script) {
-        script.onload = () => {
-          checkInterval = setInterval(checkRecaptchaLoaded, 100);
-          
-          // Clear interval after 30 seconds to prevent infinite checking
-          timeoutId = setTimeout(() => {
-            if (checkInterval) {
-              clearInterval(checkInterval);
-              checkInterval = null;
-            }
-          }, 30000);
-        };
-      }
-
-      // Reset form data when modal opens
       setFormData({
         fullName: '',
         email: '',
-        phone: '+91',
-        recaptchaToken: ''
+        phone: '+91'
       });
-
-      return () => {
-        // Clean up intervals and timeouts
-        if (checkInterval) {
-          clearInterval(checkInterval);
-        }
-        if (timeoutId) {
-          clearTimeout(timeoutId);
-        }
-
-        // Only remove the script if the modal is being closed
-        if (!isOpen) {
-          if (script && script.parentNode) {
-            script.parentNode.removeChild(script);
-          }
-          const existingRecaptcha = document.querySelector('.grecaptcha-badge');
-          if (existingRecaptcha && existingRecaptcha.parentNode) {
-            existingRecaptcha.parentNode.removeChild(existingRecaptcha);
-          }
-        }
-      };
     }
   }, [isOpen]);
 
@@ -256,8 +141,7 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
     const newErrors: FormErrors = {
       fullName: '',
       email: '',
-      phone: '',
-      recaptcha: ''
+      phone: ''
     };
     let isValid = true;
 
@@ -272,12 +156,6 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
     }
     if (!validatePhone(formData.phone)) {
       newErrors.phone = 'Enter a valid phone number (e.g., +911234567890)';
-      isValid = false;
-    }
-
-    // Explicitly check for reCAPTCHA
-    if (!formData.recaptchaToken) {
-      newErrors.recaptcha = 'Please complete the reCAPTCHA verification';
       isValid = false;
     }
 
@@ -308,8 +186,7 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
           setErrors({
             fullName: result.errors.name || '',
             email: result.errors.email || '',
-            phone: result.errors.phone || '',
-            recaptcha: ''
+            phone: result.errors.phone || ''
           });
           setLoading(false);
           return;
@@ -327,14 +204,12 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
         setFormData({
           fullName: '',
           email: '',
-          phone: '+91',
-          recaptchaToken: ''
+          phone: '+91'
         });
         setErrors({
           fullName: '',
           email: '',
-          phone: '',
-          recaptcha: ''
+          phone: ''
         });
         setShowSuccessModal(true);
       } else {
@@ -477,13 +352,6 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
                   />
                   {errors.phone && (
                     <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-                  )}
-                </div>
-
-                <div>
-                  <div id="recaptcha-container" className="flex justify-center items-center mb-2 w-full"></div>
-                  {errors.recaptcha && (
-                    <p className="text-red-500 text-sm text-center">{errors.recaptcha}</p>
                   )}
                 </div>
 
