@@ -10,7 +10,7 @@ export default function FAQsSection() {
     <div className="max-w-[1200px] mx-auto px-4 py-16">
       {/* Header */}
       <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 bg-[#F8FAFC] bg-opacity-10 px-4 py-2 rounded-full mb-6">
+        <div className="inline-flex items-center gap-2 px-4 py-2 mb-6">
           <Image src={FireSmart} alt="FireSmart" width={20} height={20} />
           <span>FAQS</span>
         </div>

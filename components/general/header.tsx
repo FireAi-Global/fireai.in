@@ -35,7 +35,7 @@ export default function Header() {
     const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
     return (
-        <header className="fixed top-2 lg:top-6 left-0 right-0 z-50 w-[80%] lg:w-[870px] rounded-[12px] mx-auto">
+        <header className="fixed top-2 lg:top-6 left-0 right-0 z-50 w-[80%] lg:w-[870px] rounded-[12px] mx-auto shadow-sm">
             <nav className="h-[66px] max-w-[1200px] mx-auto px-6 flex justify-between items-center backdrop-blur-md bg-white/80 rounded-[12px] border border-white/20">
                 {/* Logo */}
                 <Link href="/" className="flex items-center h-full">

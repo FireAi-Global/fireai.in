@@ -39,9 +39,9 @@ const benefits = [
   },
   {
     icon: OurSolutions.BenefitsThree,
-    title: "Voice-Powered, Multilingual Insights",
+    title: "Security You Can Trust",
     description:
-      "With Bhashini integration, ask questions in any language and get instant, AI-driven answers.",
+      "Your data stays secure with enterprise-grade protection. Confidence you can rely on.",
   },
   {
     icon: OurSolutions.BenefitsFour,

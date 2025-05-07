@@ -1,22 +1,16 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import { PreFooter } from "@/public/assets/landing";
 import { CompanyThemeGradient } from '@/public/assets/company';
 import Button from '@/components/general/buttons';
-import FireAIDemoModal from '@/components/general/demo-modal';
+import { useModal } from '@/context/ModalContext';
 
 export default function PreFooterSection() {
-    const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
-    
+    const { openDemoModal } = useModal();
+        
     return (
         <>
-            <FireAIDemoModal 
-                isOpen={isDemoModalOpen} 
-                onClose={() => setIsDemoModalOpen(false)} 
-            />
-
             <div 
                 className="lg:rounded-[32px] overflow-hidden text-center lg:text-left"
                 style={{
@@ -42,7 +36,7 @@ export default function PreFooterSection() {
                                 <Button
                                     variant="primary"
                                     size="large"
-                                    onClick={() => setIsDemoModalOpen(true)}
+                                    onClick={openDemoModal}
                                 >
                                     Get a demo
                                 </Button>
@@ -52,7 +46,7 @@ export default function PreFooterSection() {
                                     variant="primary"
                                     size="large"
                                     span='full'
-                                    onClick={() => setIsDemoModalOpen(true)}
+                                    onClick={openDemoModal}
                                 >
                                     Get a demo
                                 </Button>

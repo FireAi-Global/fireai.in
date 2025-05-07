@@ -3,8 +3,14 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Hero } from "@/public/assets/landing";
+import Button from '@/components/general/buttons/index';
+import Link from 'next/link';
+import links from '@/data/links';
+import { useModal } from '@/context/ModalContext';
 
 export default function HeroSection() {
+  const { openDemoModal } = useModal();
+  
   return (
     <motion.div
       className="rounded-0 lg:rounded-[20px] flex flex-col text-center px-5 lg:px-0"
@@ -22,7 +28,7 @@ export default function HeroSection() {
     >
       <div className="mx-auto">
         <div className="w-full md:w-8/12 mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl pt-30 font-medium">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl pt-40 font-medium">
             AI-Powered Business{" "}
             <span className="bg-gradient-to-r from-[#322638] via-blue-400 to-[#322638] text-transparent bg-clip-text">
               Intelligence{" "}
@@ -35,28 +41,19 @@ export default function HeroSection() {
             just sits there. Slow decisions, wasted time and missed opportunities.
             FireAI fixes that.
           </h3>
-          {/* <div className="flex flex-col lg:flex-row gap-4 justify-center mt-2 lg:mt-10">
+          <div className="flex flex-col lg:flex-row gap-4 justify-center mt-2 lg:mt-10">
             <div className="hidden lg:block">
-              <Button variant="primary">Get a demo</Button>
+              <Button variant="primary" onClick={openDemoModal}>Get a demo</Button>
             </div>
             <div className="hidden lg:block">
-              <Button
-                variant="secondary"
-                onClick={() => window.open("https://dashboard.fireai.in", "_blank")}
-              >
-                Login
-              </Button>
+              <Button variant="secondary" onClick={() => window.open("https://dashboard.fireai.in", "_blank")}>Login</Button>
             </div>
             <div className="lg:hidden">
-              <Button
-                variant="secondary"
-                span="full"
-                onClick={() => window.open("https://dashboard.fireai.in", "_blank")}
-              >
-                Login
-              </Button>
+              <Link href={links.applicationLinks.login}>
+                <Button variant="secondary" span="full">Login</Button>
+              </Link>
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="m-0 overflow-hidden">
           <Image
@@ -66,7 +63,7 @@ export default function HeroSection() {
             width={800}
             height={400}
           />
-        </div>
+        </div>        
       </div>
     </motion.div>
   );

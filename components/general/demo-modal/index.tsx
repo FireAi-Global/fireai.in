@@ -89,7 +89,7 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
         </div>
         <h2 className="text-xl font-medium mt-4">We have received your response</h2>
         <p className="text-gray-500 font-normal text-[16px] mt-2">
-          Someone from our team will reach out to you soon.
+          Thanks for your interest! Trusted by 200+ orgs to boost business insights.
         </p>
         <button
           onClick={onClose}
