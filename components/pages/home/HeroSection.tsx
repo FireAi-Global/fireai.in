@@ -28,7 +28,7 @@ export default function HeroSection() {
     >
       <div className="mx-auto">
         <div className="w-full md:w-8/12 mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl pt-40 font-medium">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl pt-35 font-medium">
             AI-Powered Business{" "}
             <span className="bg-gradient-to-r from-[#322638] via-blue-400 to-[#322638] text-transparent bg-clip-text">
               Intelligence{" "}
