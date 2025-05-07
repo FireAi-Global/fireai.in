@@ -1,5 +1,5 @@
-import FirstImage from "./1.png"
-import SecondImage from "./2.png"
-import ThirdImage from "./3.png"
+import FirstImage from "./1.webp"
+import SecondImage from "./2.webp"
+import ThirdImage from "./3.webp"
 
 export { FirstImage, SecondImage, ThirdImage }

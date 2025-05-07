@@ -1,3 +1,3 @@
-import PreFooterImage from "./image.png";
+import PreFooterImage from "./image.webp";
 
 export { PreFooterImage };

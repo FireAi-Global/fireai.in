@@ -219,7 +219,7 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
         setShowErrorModal(true);
       }
     } catch (error) {
-      console.info('Error submitting form:', error);
+      console.log("Error while submitting form", error)
       setErrorMessage('Unable to connect to the server. Please try again later.');
       setShowErrorModal(true);
     } finally {
