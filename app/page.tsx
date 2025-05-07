@@ -1,23 +1,33 @@
-import HeroSection from "@/components/pages/home/HeroSection";
-import ClientSection from "@/components/pages/home/ClientSection";
-import KeyFeaturesSection from "@/components/pages/home/KeyFeaturesSection";
-import HowFireAiWorksSection from "@/components/pages/home/HowFireAiWorksSection";
-import OurSolutionsSection from "@/components/pages/home/OurSolutionsSection";
-import MultilingualSupportSection from "@/components/pages/home/MultilingualSupportSection";
-import FAQsSection from "@/components/pages/home/FAQsSection";
-import PreFooterSection from "@/components/pages/home/PreFooterSection";
+import Home from "@/components/pages/home";
+import type { Metadata } from "next";
+import { defaultMetadata } from "@/config/metadata";
 
-export default function Home() {
-  return (
-    <div className="lg:py-3 px-0 lg:px-18">
-      <HeroSection />
-      <ClientSection />
-      <OurSolutionsSection />
-      <HowFireAiWorksSection />
-      <KeyFeaturesSection />
-      <MultilingualSupportSection />
-      <FAQsSection />
-      <PreFooterSection />
-    </div>
-  );
+export const metadata: Metadata = {
+  ...defaultMetadata,
+  title: "FireAI - AI-Powered Business Intelligence at Your Fingertips",
+  description: "FireAI transforms complex business data into actionable insights. Make smarter decisions faster with our AI-powered business intelligence platform.",
+  openGraph: {
+    ...defaultMetadata.openGraph,
+    title: "FireAI - AI-Powered Business Intelligence at Your Fingertips",
+    description: "FireAI transforms complex business data into actionable insights. Make smarter decisions faster with our AI-powered business intelligence platform.",
+    images: [
+      {
+        url: "/assets/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "FireAI - AI-Powered Business Intelligence Platform"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FireAI - AI-Powered Business Intelligence at Your Fingertips",
+    description: "FireAI transforms complex business data into actionable insights. Make smarter decisions faster with our AI-powered business intelligence platform.",
+    images: ["/assets/og-image.jpg"],
+    creator: "@fireai"
+  }
+};
+
+export default function HomePage() {
+  return <Home />
 }

@@ -7,7 +7,7 @@ import clientLogos from "@/data/home/clientLogos";
 export default function ClientSection() {
   return (
     <div className="max-w-[1200px] mx-auto py-16 px-4 text-center">
-      <h2 className="text-[20px] font-medium text-gray-800 mb-12">
+      <h2 className="text-[20px] font-semibold text-gray-800 mb-12">
         Trusted by Leading Businesses
       </h2>
 
@@ -18,9 +18,9 @@ export default function ClientSection() {
             key={index}
             src={logo.src}
             alt={logo.alt}
-            className="h-10 object-contain opacity-80 hover:opacity-100 transition-opacity duration-200"
-            width={120}
-            height={40}
+            className="h-15 object-contain"
+            width={150}
+            height={60}
           />
         ))}
       </div>

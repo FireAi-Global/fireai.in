@@ -1,13 +1,16 @@
 'use client';
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FireSmartWhite } from "@/public/assets/icons";
-import { CompanyThemeGradient } from "@/public/assets/company";
+// CompanyThemeGradient removed as it's not being used
 import { benefits, features } from "@/data/home/keyFeatures";
+import Button from "@/components/general/buttons";
+import { useModal } from "@/context/ModalContext";
 
 export default function KeyFeaturesSection() {
+  const { openDemoModal } = useModal();
   const [currentSlide, setCurrentSlide] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
@@ -34,59 +37,51 @@ export default function KeyFeaturesSection() {
   };
 
   return (
-    <div
-      className="lg:rounded-[20px] text-white py-16 lg:py-32"
-      style={{
-        backgroundImage: `url(${CompanyThemeGradient.src})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
+    <section
+      className="py-8 sm:py-12 md:py-16 bg-[#0A0A0A] text-white rounded-[20px]"
       id="features"
     >
-      <div className="max-w-[1200px] mx-auto px-4">
+      <div className="max-w-[1200px] w-full mx-auto px-4 sm:px-6 md:px-8">
         {/* Header */}
         <div className="mb-12">
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-[8px] mb-6"
-            style={{
-              background: "linear-gradient(90deg, rgba(38, 95, 185, 0.24) 0%, rgba(130, 155, 194, 0.24) 100%)",
-              border: "1px solid",
-              borderImageSource: "linear-gradient(0deg, rgba(236, 236, 236, 0.54), rgba(236, 236, 236, 0.54)), linear-gradient(0deg, rgba(236, 236, 236, 0.54), rgba(236, 236, 236, 0.54)), linear-gradient(0deg, rgba(236, 236, 236, 0.54), rgba(236, 236, 236, 0.54)), linear-gradient(0deg, rgba(236, 236, 236, 0.54), rgba(236, 236, 236, 0.54))"
-            }}
-          >
+          <div className="inline-flex items-center gap-2 bg-opacity-10 px-4 py-2 rounded-full mb-6">
             <div className="flex items-center gap-2">
               <Image src={FireSmartWhite} alt="" width={16} height={16} />
               <span className="text-white">Key features</span>
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-1">
+          <h2 className="text-1xl sm:text-2xl md:text-3xl lg:text-4xl font-medium mb-4 sm:mb-6">
             Connect, Analyze, Automate - All in One Place.
           </h2>
-          <p className="text-[#DEDEDE] mb-8 max-w-2xl mt-5">
-            FireAI integrates with your business tools, turning scattered data
+          <p className="text-[#A1A1A1] text-base sm:text-lg max-w-[600px] mb-6 sm:mb-8">
+            FireAI transforms your business data from complex spreadsheets
             into smart insights. Make faster decisions, optimize workflows and
             stay ahead with predictive analytics.
           </p>
+          
+          <Button variant="primary" onClick={openDemoModal}>
+            Get a demo
+          </Button>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-6 mb-10 sm:mb-16">
           {features.map((feature, index) => (
             <motion.div
               key={index}
               className={`
-                w-full border rounded-[12px] bg-[#26263C26] backdrop-blur-[100px] 
-                ${index === 0 ? "pt-5" : "p-6"} 
-                ${index === 0 || index === 3 ? "lg:col-span-7" : "lg:col-span-5"} border-[#D2CECE4F]`}
+                w-full border rounded-[12px] bg-[#26263C26] backdrop-blur-[100px] p-6
+                ${index === 0 || index === 3 ? "lg:col-span-6" : "lg:col-span-6"} border-[#D2CECE4F]`}
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{
-                duration: 1,
-                ease: "easeInOut",
+                duration: 0.6,
+                delay: index * 0.1,
+                ease: [0.25, 0.1, 0.25, 1.0],
               }}
             >
-              <div className={`${index === 0 ? "px-6" : ""}`}>
+              <div>
                 <h3 className="text-3xl md:text-2xl font-medium mb-2">
                   {feature.title}
                 </h3>
@@ -101,14 +96,7 @@ export default function KeyFeaturesSection() {
 
         {/* Why FireAI Section */}
         <div className="mb-12">
-          <div
-            className="inline-flex items-center gap-2 bg-opacity-10 px-4 py-2 rounded-full mb-6"
-            style={{
-              background: "linear-gradient(90deg, rgba(38, 95, 185, 0.24) 0%, rgba(130, 155, 194, 0.24) 100%)",
-              border: "1px solid",
-              borderImageSource: "linear-gradient(0deg, rgba(236, 236, 236, 0.54), rgba(236, 236, 236, 0.54)), linear-gradient(0deg, rgba(236, 236, 236, 0.54), rgba(236, 236, 236, 0.54)), linear-gradient(0deg, rgba(236, 236, 236, 0.54), rgba(236, 236, 236, 0.54)), linear-gradient(0deg, rgba(236, 236, 236, 0.54), rgba(236, 236, 236, 0.54))"
-            }}
-          >
+          <div className="inline-flex items-center gap-2 bg-opacity-10 px-4 py-2 rounded-full mb-6">
             <span className="flex items-center gap-2">
               <Image src={FireSmartWhite} alt="" width={16} height={16} />
               <span className="text-white">Why FireAI</span>
@@ -147,7 +135,7 @@ export default function KeyFeaturesSection() {
                     />
                   </div>
                 </div>
-                <h3 className="text-[20px] font-medium text-white h-[50px] mb-5">
+                <h3 className="text-[20px] font-medium text-white mb-3">
                   {benefit.title}
                 </h3>
                 <p className="text-[#A1A1A1] text-[15px] leading-[22px]">
@@ -202,6 +190,6 @@ export default function KeyFeaturesSection() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

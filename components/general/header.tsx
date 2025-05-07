@@ -35,7 +35,7 @@ export default function Header() {
     const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
     return (
-        <header className="fixed top-2 lg:top-6 left-0 right-0 z-50 w-[80%] lg:w-[870px] rounded-[12px] mx-auto">
+        <header className="fixed top-2 lg:top-6 left-0 right-0 z-50 w-[80%] lg:w-[870px] rounded-[12px] mx-auto shadow-sm">
             <nav className="h-[66px] max-w-[1200px] mx-auto px-6 flex justify-between items-center backdrop-blur-md bg-white/80 rounded-[12px] border border-white/20">
                 {/* Logo */}
                 <Link href="/" className="flex items-center h-full">
@@ -101,6 +101,8 @@ export default function Header() {
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         className="text-gray-600 hover:text-gray-900"
+                        aria-label="Toggle mobile menu"
+                        aria-expanded={isMenuOpen}
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M3 12h18M3 6h18M3 18h18" />
