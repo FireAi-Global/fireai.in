@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import styles from './ButtonStyle.module.scss';
-import { buttons, transitions, colors } from '@/config/theme';
+import { transitions } from '@/config/theme';
 
 interface ButtonProps {
   children: React.ReactNode;

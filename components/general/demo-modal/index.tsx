@@ -47,6 +47,7 @@ function ErrorModal({ onClose, errorMessage }: { onClose: () => void; errorMessa
         <button
           onClick={onClose}
           className="w-full flex justify-center cursor-pointer items-center text-center align-middle mt-[36px] h-[42px] bg-gradient-to-r from-red-800 via-red-700 to-red-500 text-white py-3 rounded-lg text-lg font-medium hover:opacity-90 transition"
+          aria-label="Close error message"
         >
           Close
         </button>
@@ -94,6 +95,7 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
         <button
           onClick={onClose}
           className="w-full flex justify-center cursor-pointer items-center text-center align-middle mt-[36px] h-[42px] bg-gradient-to-r from-blue-800 via-blue-700 to-blue-500 text-white py-3 rounded-lg text-lg font-medium hover:opacity-90 transition"
+          aria-label="Close success message"
         >
           Close
         </button>
@@ -217,7 +219,7 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
         setShowErrorModal(true);
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.info('Error submitting form:', error);
       setErrorMessage('Unable to connect to the server. Please try again later.');
       setShowErrorModal(true);
     } finally {
@@ -358,6 +360,7 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
                 <button
                   type="submit"
                   disabled={loading}
+                  aria-label="Submit demo request form"
                   className={`w-full flex justify-center cursor-pointer 
                       items-center text-center align-middle mt-[36px] h-[42px] ${
                         loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-800 via-blue-700 to-blue-500'
@@ -370,6 +373,7 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
               <button
                 onClick={handleMainModalClose}
                 className="absolute top-2 right-4 font-light cursor-pointer text-gray-500 hover:text-gray-700 text-sm"
+                aria-label="Close demo request form"
               >
                 ✖
               </button>

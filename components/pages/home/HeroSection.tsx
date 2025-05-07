@@ -13,12 +13,7 @@ export default function HeroSection() {
   
   return (
     <motion.div
-      className="rounded-0 lg:rounded-[20px] flex flex-col text-center px-5 lg:px-0"
-      style={{
-        backgroundImage: `url(${Hero.HeroBackground.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="rounded-0 lg:rounded-[20px] flex flex-col text-center px-5 lg:px-0 bg-[#f8f8fc] border border-[rgba(130,133,206,0.2)]"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{

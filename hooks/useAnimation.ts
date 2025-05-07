@@ -1,13 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useInView } from 'framer-motion';
 import { transitions } from '@/config/theme';
 
 /**
+ * Type for animation variant keys
+ */
+export type AnimationVariantType = 'fadeIn' | 'fadeInUp' | 'fadeInDown' | 'fadeInLeft' | 'fadeInRight' | 'scaleIn' | 'staggerContainer';
+
+/**
  * Animation variants for common animation patterns
  */
-export const animationVariants = {
+export const animationVariants: Record<AnimationVariantType, any> = {
   fadeIn: {
     hidden: { opacity: 0 },
     visible: { 
@@ -62,7 +67,7 @@ export const animationVariants = {
       }
     }
   },
-  scale: {
+  scaleIn: {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { 
       opacity: 1, 
@@ -84,13 +89,25 @@ export const animationVariants = {
 };
 
 /**
+ * Interface for animation options
+ */
+interface AnimationOptions {
+  variant?: AnimationVariantType | Record<string, any>;
+  threshold?: number;
+  delay?: number;
+  duration?: number;
+  once?: boolean;
+  ease?: number[];
+  rootMargin?: string;
+}
+
+/**
  * Custom hook for managing animations with Framer Motion
  * 
- * @param ref - Reference to the element to animate
- * @param options - Animation options
+ * @param options Animation options
  * @returns Animation properties and state
  */
-export function useAnimation(options = {}) {
+export function useAnimation(options: AnimationOptions = {}) {
   const {
     variant = 'fadeIn',
     threshold = 0.1,
@@ -104,7 +121,8 @@ export function useAnimation(options = {}) {
   // Get the animation variant
   const getVariant = () => {
     if (typeof variant === 'string') {
-      return animationVariants[variant] || animationVariants.fadeIn;
+      // Check if the variant exists in our predefined variants
+      return animationVariants[variant as AnimationVariantType] || animationVariants.fadeIn;
     }
     return variant;
   };
@@ -124,11 +142,11 @@ export function useAnimation(options = {}) {
   };
 
   // Create a ref for the element to animate
-  const [ref, setRef] = useState(null);
-  const inView = useInView(ref, { 
-    once, 
-    threshold,
-    rootMargin
+  const elementRef = useRef<HTMLElement>(null);
+  const inView = useInView(elementRef, { 
+    once
+    // Framer Motion's useInView uses 'amount' instead of 'threshold'
+    // and doesn't support rootMargin directly
   });
 
   // Animation controls
@@ -140,20 +158,24 @@ export function useAnimation(options = {}) {
 
   // Update controls when inView changes
   useEffect(() => {
-    if (ref) {
+    if (elementRef.current) {
       setControls({
         initial: 'hidden',
         animate: inView ? 'visible' : 'hidden',
         variants: customVariant
       });
     }
-  }, [inView, ref]);
+  }, [inView, customVariant]);
 
   return {
-    ref: setRef,
+    ref: elementRef,
     inView,
     ...controls,
-    variants: customVariant
+    transition: {
+      duration,
+      delay,
+      ease
+    }
   };
 }
 

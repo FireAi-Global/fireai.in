@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { FireSmart } from "@/public/assets/icons";
 import slides from "@/data/home/ourSolutions";
-import { useResponsive } from '@/hooks/useResponsive';
 
 // Memoized Feature component for better performance
 const Feature = memo(({ feature }: { feature: { title: string; description: string } }) => (
@@ -24,7 +23,6 @@ const Feature = memo(({ feature }: { feature: { title: string; description: stri
 Feature.displayName = 'Feature';
 
 export default function OurSolutionsSection() {
-  const { isMobile, isTablet } = useResponsive();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const ROTATION_INTERVAL = 5000; // 5 seconds per slide

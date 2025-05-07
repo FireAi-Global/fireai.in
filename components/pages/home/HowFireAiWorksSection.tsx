@@ -7,7 +7,6 @@ import { FireSmart } from "@/public/assets/icons";
 import cards from "@/data/home/howFireAiWorks";
 import Button from '@/components/general/buttons/index';
 import { useModal } from '@/context/ModalContext';
-import { useResponsive } from '@/hooks/useResponsive';
 
 interface CardProps {
   card: {
@@ -35,7 +34,6 @@ Card.displayName = 'Card';
 
 export default function HowFireAiWorksSection() {
   const { openDemoModal } = useModal();
-  const { isMobile, isTablet } = useResponsive();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const ROTATION_INTERVAL = 5000; // 5 seconds per slide

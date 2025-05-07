@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FireSmartWhite } from "@/public/assets/icons";
-import { CompanyThemeGradient } from "@/public/assets/company";
+// CompanyThemeGradient removed as it's not being used
 import { benefits, features } from "@/data/home/keyFeatures";
 import Button from "@/components/general/buttons";
 import { useModal } from "@/context/ModalContext";

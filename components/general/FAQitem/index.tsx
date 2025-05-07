@@ -20,7 +20,11 @@ export default function FAQItem({ question, answer }: FAQItemProps) {
     >
       <div className="flex justify-between items-center">
         <h3 className="text-base text-black">{question}</h3>
-        <button className="text-blue-500 w-4 h-4 lg:w-8 lg:h-8 min-w-[28px] min-h-[28px] flex items-center justify-center">
+        <button 
+          className="text-blue-500 w-4 h-4 lg:w-8 lg:h-8 min-w-[28px] min-h-[28px] flex items-center justify-center"
+          aria-label={isOpen ? `Collapse answer for: ${question}` : `Expand answer for: ${question}`}
+          aria-expanded={isOpen}
+        >
           <span className="text-xl leading-none mb-[2px]">
             {isOpen ? (
               <Image src={Minus} alt="Minus" width={16} height={16} />
