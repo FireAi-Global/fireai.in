@@ -16,16 +16,10 @@ const cards = [
       alt: "Extract data from your databases, Tally and other business tools"
     },
     {
-      title: "Analyze",
-      description: "Analyze your data with our AI-powered system.",
-      image: HowFireAiWorks.ThirdImage,
-      alt: "Analyze your data with our AI-powered system"
-    },
-    {
       title: "Share",
       description:
         "Share insights with your team and make informed decisions together in real-time.",
-      image: HowFireAiWorks.FourthImage,
+      image: HowFireAiWorks.ThirdImage,
       alt: "Share insights with your team and make informed decisions together in real-time"
     },
   ];

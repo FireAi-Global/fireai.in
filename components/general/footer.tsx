@@ -94,7 +94,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-gray-700"
                 >
-                  <Image src={social.icon} alt={social.name} className="w-5 h-5" />
+                  <Image src={social.icon} alt={social.href} className="w-5 h-5" />
                   <span className="hidden lg:block">{social.name}</span>
                 </a>
               ))}
