@@ -114,15 +114,50 @@ const Privacy = () => {
         </p>
       </section>
 
+      {/* Incident Reporting and CERT-In Compliance */}
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">10. Changes to This Policy</h2>
+        <h2 className="text-2xl font-semibold mb-4">10. Incident Reporting and CERT-In Compliance</h2>
+        <p>
+          We are committed to maintaining the security and integrity of our systems and user data. In line with the directives issued by the Indian Computer Emergency Response Team (CERT-In), we have established a formal process for identifying, assessing, and reporting cybersecurity incidents.
+        </p>
+        <p className="my-4">
+          As part of our compliance obligations:
+        </p>
+        <ul className="list-disc ml-6 space-y-2 mb-4">
+          <li>
+            <span className="font-medium">Timely Notification:</span> In the event of a cybersecurity incident, we are committed to reporting the incident to CERT-In within 6 hours of detection or identification, in accordance with applicable regulatory requirements.
+          </li>
+          <li>
+            <span className="font-medium">Official Reporting Channels:</span> All such reports are submitted through the official communication channels designated by CERT-In, including:
+            <ul className="list-disc ml-6 space-y-1 mt-1">
+              <li>Email: <a href="mailto:incident@cert-in.org.in" className="text-blue-600 hover:underline">incident@cert-in.org.in</a></li>
+              <li>Phone: <a href="tel:1800-11-4949" className="text-blue-600 hover:underline">1800-11-4949</a></li>
+            </ul>
+          </li>
+          <li>
+            <span className="font-medium">Reporting Format:</span> We use the standardized reporting template provided in Annexure-I of the CERT-In circular dated April 28, 2022, ensuring that all required details—such as incident type, affected systems, detection timeline, and mitigation actions—are thoroughly documented.
+          </li>
+          <li>
+            <span className="font-medium">Internal Process:</span> Our internal cybersecurity response policy ensures that incidents are promptly escalated, validated, and reported to the appropriate authorities, enabling rapid containment and resolution.
+          </li>
+          <li>
+            <span className="font-medium">Recordkeeping:</span> All incident reports and related correspondence are securely maintained as part of our compliance and audit practices.
+          </li>
+        </ul>
+        <p>
+          This proactive approach to incident reporting supports our ongoing efforts to protect user data, ensure system resilience, and comply with applicable cybersecurity regulations in India.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">11. Changes to This Policy</h2>
         <p>
           Fire AI may update this Privacy Policy periodically. Significant changes will be communicated via email or an in-app alert.
         </p>
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">11. Contact Us</h2>
+        <h2 className="text-2xl font-semibold mb-4">12. Contact Us</h2>
         <p>
           For any questions or concerns about this Privacy Policy, please reach out to:{" "}
           <a href="mailto:info@fireai.in" className="text-blue-600 hover:underline">
