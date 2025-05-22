@@ -283,7 +283,7 @@ export default function FireAIDemoModal({ isOpen, onClose }: ModalProps) {
                 o Call
               </h2>
               <p className="text-gray-500 font-normal text-center text-[16px] leading-[24px] mb-6">
-                We'll call you within 3 hours to understand your needs and demonstrate how FireAI can help.
+                We&apos;ll call you within 3 hours to understand your needs and demonstrate how FireAI can help.
               </p>
 
               <form className="space-y-5 mt-[28px]" onSubmit={handleSubmit}>
