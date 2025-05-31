@@ -1,3 +1,3 @@
-import HeroImage from "./HeroImage.webp"
+import HeroImage from "./HeroImage.png"
 
 export {HeroImage}
