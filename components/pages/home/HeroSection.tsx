@@ -54,7 +54,7 @@ export default function HeroSection() {
           <Image
             src={Hero.HeroImage}
             alt="Hero Dashboard"
-            className="lg:w-[80%] mx-auto w-[380px] min-h-[200px]"
+            className="lg:w-[85%] mx-auto w-[380px] min-h-[200px]"
             width={800}
             height={400}
           />
