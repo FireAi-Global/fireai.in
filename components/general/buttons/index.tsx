@@ -19,31 +19,31 @@ interface ButtonProps {
 }
 
 const getButtonClasses = (
-  variant: "primary" | "secondary" | "ghost", 
-  size: "small" | "medium" | "large", 
-  span: "full" | "fit", 
+  variant: "primary" | "secondary" | "ghost",
+  size: "small" | "medium" | "large",
+  span: "full" | "fit",
   disabled: boolean,
   className?: string
 ) => {
   const baseClasses = "rounded-[44px] lg:rounded-[8px] transition-all duration-300";
-  
+
   // Map variant to style classes
   const variantClasses = {
     primary: styles.primary,
     secondary: styles.secondary,
     ghost: 'bg-transparent border border-transparent text-primary-700 hover:bg-gray-50'
   }[variant];
-  
+
   // Map size to style classes
   const sizeClasses = {
     small: styles.small,
     medium: styles.medium,
     large: styles.large
   }[size];
-  
+
   const spanClasses = span === "full" ? "w-full" : "w-fit";
   const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : '';
-  
+
   return `${styles.button} ${baseClasses} ${variantClasses} ${sizeClasses} ${spanClasses} ${disabledClasses} ${className || ''}`;
 };
 
@@ -61,7 +61,7 @@ export default function Button(props: ButtonProps) {
     onClick,
     children
   } = props;
-  
+
   const buttonClass = getButtonClasses(
     variant,
     size,
@@ -76,8 +76,9 @@ export default function Button(props: ButtonProps) {
     animate: { opacity: 1, y: 0 },
     transition: {
       duration: 0.3,
-      ease: transitions.timing.gentle,
+      ease: transitions.timing.gentle as [number, number, number, number],
     },
+
     whileHover: { y: -2, boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)' },
     whileTap: { y: 0 }
   };

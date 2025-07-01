@@ -61,7 +61,7 @@ export default function OurSolutionsSection() {
 			scale: 1,
 			transition: {
 				duration: 0.4,
-				ease: [0.25, 0.1, 0.25, 1.0],
+				ease: [0.25, 0.1, 0.25, 1.0] as [number, number, number, number],
 				when: "beforeChildren",
 				staggerChildren: 0.1,
 			},
@@ -72,7 +72,7 @@ export default function OurSolutionsSection() {
 			scale: 0.98,
 			transition: {
 				duration: 0.3,
-				ease: [0.25, 0.1, 0.25, 1.0],
+				ease: [0.25, 0.1, 0.25, 1.0] as [number, number, number, number],
 			},
 		},
 	};

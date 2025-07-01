@@ -72,7 +72,7 @@ export default function HowFireAiWorksSection() {
 			scale: 1,
 			transition: {
 				duration: 0.4,
-				ease: [0.25, 0.1, 0.25, 1.0],
+				ease: [0.25, 0.1, 0.25, 1.0] as [number, number, number, number],
 				when: "beforeChildren",
 			},
 		},
@@ -82,7 +82,7 @@ export default function HowFireAiWorksSection() {
 			scale: 0.95,
 			transition: {
 				duration: 0.3,
-				ease: [0.25, 0.1, 0.25, 1.0],
+				ease: [0.25, 0.1, 0.25, 1.0] as [number, number, number, number],
 			},
 		},
 	};
