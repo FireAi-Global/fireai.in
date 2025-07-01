@@ -295,10 +295,10 @@ const JobDetailsAndApply: React.FC = () => {
                                     <option value="Mumbai">Mumbai</option>
                                     <option value="Bangalore">Bangalore</option>
                                     <option value="Hyderabad">Hyderabad</option>
-                                    <option value="Remote">Delhi</option>
-                                    <option value="Remote">Gurugram</option>
-                                    <option value="Remote">Noida</option>
-                                    <option value="Remote">Others</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Gurugram">Gurugram</option>
+                                    <option value="Noida">Noida</option>
+                                    <option value="Others">Others</option>
                                 </select>
                             </div>
 
