@@ -2,7 +2,7 @@
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import { carryBagIconBlue, clock5Icon, locationBlueIcon } from '@/public/assets/landing/career';
+import { clock5Icon, locationBlueIcon } from '@/public/assets/landing/career';
 import Button from '@/components/general/buttons';
 
 interface Job {
@@ -199,7 +199,7 @@ const JobDetailsAndApply: React.FC = () => {
                     </div>
 
                     {/* Roles */}
-                    {job.role && (
+                    {Array.isArray(job?.role) && job?.role?.length > 0 && (
                         <div>
                             <h2 className="text-2xl font-semibold mt-9 mb-6">What will you be doing?</h2>
                             <ul className="list-disc list-inside space-y-5 text-[#494949]">
@@ -211,7 +211,7 @@ const JobDetailsAndApply: React.FC = () => {
                     )}
 
                     {/* Skills */}
-                    {job.skills && (
+                    {Array.isArray(job?.skills) && job?.skills?.length > 0 && (
                         <div>
                             <h2 className="text-2xl font-semibold mt-9 mb-6">What you will need to bring to the table?</h2>
                             <ul className="list-disc list-inside space-y-5 text-[#494949]">
@@ -223,7 +223,7 @@ const JobDetailsAndApply: React.FC = () => {
                     )}
 
                     <div className="pt-4 space-y-4 text-[#21263C]">
-                        <div className='flex items-center gap-3'><Image height={20} width={20} alt='experience' src={carryBagIconBlue} /><strong>Compensation:</strong> {job.Compensation || 'Not to be disclosed'}</div>
+                        {/* <div className='flex items-center gap-3'><Image height={20} width={20} alt='experience' src={carryBagIconBlue} /><strong>Compensation:</strong> {job.Compensation || 'Not to be disclosed'}</div> */}
                         <div className='flex items-center gap-3'><Image height={20} width={20} alt='experience' src={clock5Icon} /><strong>Experience:</strong> {job.Experience || 'Not specified'}</div>
                         <div className='flex items-center gap-3'><Image height={20} width={20} alt='experience' src={locationBlueIcon} /><strong>Location:</strong> {job.isRemote ? 'Remote' : job.location}</div>
                     </div>
